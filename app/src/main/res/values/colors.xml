@@ -3,6 +3,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+
+    <color name="background">#242424</color>
+
     <color name="dark_blue">#19093C</color>
     <color name="navy_blue">#333A73</color>
     <color name="blue">#387ADF</color>
