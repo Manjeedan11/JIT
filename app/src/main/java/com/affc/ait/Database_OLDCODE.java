@@ -7,11 +7,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-public class Database extends SQLiteOpenHelper {
+public class Database_OLDCODE extends SQLiteOpenHelper {
     public static final String DBname = "register.db";
     SQLiteDatabase sqLiteDatabase;
 
-    public Database(@Nullable Context context) {
+    public Database_OLDCODE(@Nullable Context context) {
         super(context, DBname, null, 1);
     }
 
