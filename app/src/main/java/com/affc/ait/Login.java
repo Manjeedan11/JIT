@@ -20,24 +20,24 @@ public class Login extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        db = new Database(this);
-        etUsername = findViewById(R.id.etUsername);
-        etPwd = findViewById(R.id.etPassword);
-        btnLogin = findViewById((R.id.btnLogin));
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                  boolean isLoggedId = db.checkUser(etUsername.getText().toString(), etPwd.getText().toString());
-                  if(isLoggedId){
-                      Intent intent = new Intent(Login.this, Home.class);
-                      startActivity(intent);
-                  }
-                  
-                  else {
-                      Toast.makeText(Login.this, "Login Failed", Toast.LENGTH_SHORT).show();
-                  }
-            }
-        });
+//        setContentView(R.layout.activity_login);
+//        db = new Database(this);
+//        etUsername = findViewById(R.id.setUsername); //?????
+//        etPwd = findViewById(R.id.setPassword); //????? what
+//        btnLogin = findViewById((R.id.btnLogin));
+//        btnLogin.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                  boolean isLoggedId = db.checkUser(etUsername.getText().toString(), etPwd.getText().toString());
+//                  if(isLoggedId){
+//                      Intent intent = new Intent(Login.this, Home.class);
+//                      startActivity(intent);
+//                  }
+//
+//                  else {
+//                      Toast.makeText(Login.this, "Login Failed", Toast.LENGTH_SHORT).show();
+//                  }
+//            }
+//        });
     }
 }

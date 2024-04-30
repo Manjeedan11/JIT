@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".addCourses"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <EditText
+            android:id="@+id/courseName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Course Name"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:inputType="text"
+            android:drawablePadding="10dp"
+            android:layout_marginTop="20dp"/>
+
+        <EditText
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Description"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:inputType="text"
+            android:drawablePadding="10dp"
+            android:layout_marginTop="20dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/startDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Start Date"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"
+                android:inputType="date"
+                android:drawablePadding="10dp"
+                android:layout_marginTop="20dp"
+
+                />
+
+            <EditText
+                android:id="@+id/endsDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="End Date"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"
+                android:inputType="date"
+                android:drawablePadding="10dp"
+                android:layout_marginTop="20dp"/>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/courseFee"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:hint="Course Fee"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:drawablePadding="10dp"
+            android:layout_marginTop="20dp"
+            />
+
+        <EditText
+            android:id="@+id/maxpp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Max Participants"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:drawablePadding="10dp"
+            android:layout_marginTop="20dp"
+            />
+
+        <Spinner
+            android:id="@+id/branches"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            />
+
+        <EditText
+            android:id="@+id/publishDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:hint="Publish Date"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:drawablePadding="10dp"
+            android:layout_marginTop="20dp"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/dark_blue"
+            android:textColor="@color/white"
+            android:text="Add Course"
+            android:layout_margin="20dp"
+            />
+
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>
