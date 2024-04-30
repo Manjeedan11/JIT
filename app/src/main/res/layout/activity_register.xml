@@ -159,9 +159,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Register"
-                android:background="@color/pink"
                 android:textColor="@color/white"
-                android:background="@color/pink"
                 android:padding="10dp"
                 android:layout_marginTop="20dp"
                 android:textStyle="bold"
@@ -177,17 +175,6 @@
                 android:textColor="@color/white"
                 />
 
-            <Button
-                android:id="@+id/login"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Login instead"
-                android:textColor="@color/white"
-                android:background="none"
-
-                android:padding="10dp"
-                android:layout_marginTop="20dp"
-                />
 
         </LinearLayout>
     </ScrollView>
