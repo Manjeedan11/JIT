@@ -76,7 +76,7 @@
                 android:textColor="#FFFFFF"/>
 
             <EditText
-                android:id="@+id/login_email"
+                android:id="@+id/verifyCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
