@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AdminDashboard"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:layout_marginTop="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ADMIN DASHBOARD"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:textStyle="bold"
+
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/addCourse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="Add Course"
+            app:icon="@drawable/student_register"
+            app:iconSize="50dp"
+            android:padding="20dp"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            app:cornerRadius="10dp"
+            android:backgroundTint="@color/dark_blue"
+            android:layout_margin="5dp"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/addBranch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="Add Branch"
+            app:icon="@drawable/map_marker"
+            app:iconSize="50dp"
+            android:padding="20dp"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            app:cornerRadius="10dp"
+            android:backgroundTint="@color/purple"
+            android:layout_margin="5dp"
+            />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/searchUsers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="Search Users"
+            app:icon="@drawable/find_user"
+            app:iconSize="50dp"
+            android:padding="20dp"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            app:cornerRadius="10dp"
+            android:backgroundTint="@color/gold"
+            android:layout_margin="5dp"
+            />
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/transparent"
+        android:textColor="@color/red"
+        />
+    
+<ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentRight="true"
+
+    android:src="@drawable/square_design"/>
+
+
+
+</RelativeLayout>
