@@ -13,6 +13,9 @@
         android:theme="@style/Theme.AIT"
         tools:targetApi="31">
         <activity
+            android:name=".AddBranch"
+            android:exported="false" />
+        <activity
             android:name=".addCourses"
             android:exported="false" />
         <activity
