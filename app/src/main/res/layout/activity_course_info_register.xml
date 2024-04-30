@@ -78,10 +78,11 @@
                         android:layout_height="match_parent">
 
                         <TextView
+                            android:id="@+id/courseName"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:gravity="center"
-                            android:text="Business"
+                            android:text="##Course Name##"
                             android:textColor="#FFC300"
                             android:textSize="30sp"
                             android:textStyle="bold" />
@@ -99,11 +100,12 @@
                             android:textSize="18sp" />
 
                         <TextView
+                            android:id="@+id/courseFee"
                             android:layout_width="160dp"
                             android:layout_height="25dp"
                             android:layout_marginLeft="118dp"
                             android:layout_marginTop="95dp"
-                            android:text="LKR 50,000"
+                            android:text="####"
                             android:textColor="@color/white"
                             android:textSize="18sp" />
 
@@ -114,17 +116,18 @@
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="120dp"
                             android:gravity="center"
-                            android:text="Branches :"
+                            android:text="Branche :"
                             android:textColor="@color/white"
                             android:textSize="18sp" />
 
                         <TextView
+                            android:id="@+id/courseBranches"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="103dp"
                             android:layout_marginTop="120dp"
                             android:gravity="center"
-                            android:text="Colombo and Kandy"
+                            android:text="####"
                             android:textColor="@color/white"
                             android:textSize="18sp" />
 
@@ -140,12 +143,13 @@
                             android:textSize="18sp" />
 
                         <TextView
+                            android:id="@+id/courseDuration"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="91dp"
                             android:layout_marginTop="145dp"
                             android:gravity="center"
-                            android:text="10 days"
+                            android:text="####"
                             android:textColor="@color/white"
                             android:textSize="18sp" />
 
@@ -161,12 +165,13 @@
                             android:textSize="18sp" />
 
                         <TextView
+                            android:id="@+id/courseStarting"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="110dp"
                             android:layout_marginTop="170dp"
                             android:gravity="center"
-                            android:text="15 March 2024"
+                            android:text="####"
                             android:textColor="@color/white"
                             android:textSize="18sp" />
 
@@ -182,12 +187,13 @@
                             android:textSize="18sp" />
 
                         <TextView
+                            android:id="@+id/coursePublished"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="127dp"
                             android:layout_marginTop="195dp"
                             android:gravity="center"
-                            android:text="15 March 2024"
+                            android:text="####"
                             android:textColor="@color/white"
                             android:textSize="18sp" />
 
@@ -203,12 +209,13 @@
                             android:textSize="18sp" />
 
                         <TextView
+                            android:id="@+id/closingRegDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="220dp"
                             android:layout_marginTop="220dp"
                             android:gravity="center"
-                            android:text="15 July 2024"
+                            android:text="####"
                             android:textColor="@color/white"
                             android:textSize="18sp" />
 
