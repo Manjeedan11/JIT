@@ -1,6 +1,7 @@
 package com.affc.ait.models;
 
-import java.util.Date;
+import android.graphics.Picture;
+import android.graphics.drawable.PictureDrawable;
 
 public class Student {
 
@@ -14,16 +15,27 @@ public class Student {
     private String gender;
     private String DOB;
 
-    public Student(int id, String name, String email, String login_code, String address, String city, String phone, String gender, String DOB) {
+    private PictureDrawable profilePicture;
+
+    public PictureDrawable getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(PictureDrawable profilePicture) {
+        this.profilePicture = profilePicture;
+    }
+
+    public Student(int id, String name, String email, String login_code, String address, String city, String phone, String gender, String DOB, PictureDrawable profilePic) {
         this.id = id;
         this.name = name;
         this.email = email;
-        this.login_code = login_code;
+        this.login_code = generateLoginCode();
         this.address = address;
         this.city = city;
         this.phone = phone;
         this.gender = gender;
         this.DOB = DOB;
+        this.profilePicture = profilePic;
     }
 
     public int getId() {
@@ -111,6 +123,11 @@ public class Student {
                 ", gender='" + gender + '\'' +
                 ", DOB='" + DOB + '\'' +
                 '}';
+    }
+
+    public String generateLoginCode(){
+        //TODO generate login code. sending it is handled by another class
+        return " ";
     }
 
 

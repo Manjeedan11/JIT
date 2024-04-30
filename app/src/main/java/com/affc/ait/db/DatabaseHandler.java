@@ -1,8 +1,11 @@
 package com.affc.ait.db;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.affc.ait.models.Student;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
@@ -27,7 +30,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 "    city TEXT,        " +
                 "    phone TEXT,          " +
                 "    gender TEXT,             " +
-                "    DOB TEXT                    " +
+                "    DOB TEXT,               " +
+                " profile_picture BLOB " +
                 ");";
         final String sqlForAdmin = "CREATE TABLE Admin (" +
                 "admin_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -69,22 +73,47 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     /*
     list of methods needed to work with the db:
-    add user
+    TODO:
+
     add profile picture
     verify user email
     generate and update login code
-
     fetch all courses (limit to 10)
     query for courses by name
     fetch single course info
+    -------------------------------
     fetch branches for given course
-
     verify admin
     add new course
     add new branch
     fetch all users (limit to 10)
     query for users by name
+
+    DONE:
+    add student
+
+
      */
+
+    public void addStudent(Student student) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("name", student.getName());
+        values.put("email", student.getEmail());
+        values.put("login_code", student.getLogin_code());
+        values.put("address", student.getAddress());
+        values.put("city", student.getCity());
+        values.put("phone", student.getPhone());
+        values.put("gender", student.getGender());
+        values.put("DOB", student.getDOB());
+
+        // Inserting Row
+        db.insert("Student", null, values);
+        //2nd argument is String containing nullColumnHack
+        db.close(); // Closing database connection
+    }
+
+    public void addProfilePicture
 
 
 }
