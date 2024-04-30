@@ -85,4 +85,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     fetch all users (limit to 10)
     query for users by name
      */
+
+
 }
