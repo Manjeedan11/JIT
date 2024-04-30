@@ -13,6 +13,12 @@
         android:theme="@style/Theme.AIT"
         tools:targetApi="31">
         <activity
+            android:name=".AdminDashboard"
+            android:exported="false" />
+        <activity
+            android:name=".AdminLogin"
+            android:exported="false" />
+        <activity
             android:name=".SetupProfileActivity"
             android:exported="false" />
         <activity
