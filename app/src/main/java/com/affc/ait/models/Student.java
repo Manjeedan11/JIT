@@ -15,17 +15,17 @@ public class Student {
     private String gender;
     private String DOB;
 
-    private PictureDrawable profilePicture;
+    private byte[] profilePicture;
 
-    public PictureDrawable getProfilePicture() {
+    public byte[] getProfilePicture() {
         return profilePicture;
     }
 
-    public void setProfilePicture(PictureDrawable profilePicture) {
+    public void setProfilePicture(byte[] profilePicture) {
         this.profilePicture = profilePicture;
     }
 
-    public Student(int id, String name, String email, String login_code, String address, String city, String phone, String gender, String DOB, PictureDrawable profilePic) {
+    public Student(int id, String name, String email, String address, String city, String phone, String gender, String DOB, byte[] profilePic) {
         this.id = id;
         this.name = name;
         this.email = email;
