@@ -51,7 +51,7 @@
             >
 
             <EditText
-                android:id="@+id/username"
+                android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Name"
@@ -173,6 +173,7 @@
                 android:text="Login instead"
                 android:background="@android:color/transparent"
                 android:textColor="@color/white"
+                android:onClick="redirectToLogin"
                 />
 
 

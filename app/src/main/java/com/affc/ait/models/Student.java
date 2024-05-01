@@ -25,8 +25,7 @@ public class Student {
         this.profilePicture = profilePicture;
     }
 
-    public Student(int id, String name, String email, String address, String city, String phone, String gender, String DOB, byte[] profilePic) {
-        this.id = id;
+    public Student(String name, String email, String address, String city, String phone, String gender, String DOB) {
         this.name = name;
         this.email = email;
         this.login_code = generateLoginCode();
@@ -35,10 +34,21 @@ public class Student {
         this.phone = phone;
         this.gender = gender;
         this.DOB = DOB;
-        this.profilePicture = profilePic;
     }
 
-    public int getId() {
+    public Student(int id, String name, String email, String address, String city, String phone, String gender, String DOB, byte[] profilePicture) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.login_code = generateLoginCode();
+        this.address = address;
+        this.city = city;
+        this.phone = phone;
+        this.gender = gender;
+        this.profilePicture = profilePicture;
+    }
+
+        public int getId() {
         return id;
     }
 
