@@ -91,7 +91,7 @@
                 android:id="@+id/dob"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Date of Birth"
+                android:hint="Date of Birth (yyyy-mm-dd)"
                 android:padding="10dp"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"
@@ -164,6 +164,7 @@
                 android:layout_marginTop="20dp"
                 android:textStyle="bold"
                 android:textAllCaps="true"
+                android:onClick="register"
                 />
 
             <Button

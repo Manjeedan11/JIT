@@ -101,6 +101,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
+
     /*
     list of methods needed to work with the db:
     TODO:
