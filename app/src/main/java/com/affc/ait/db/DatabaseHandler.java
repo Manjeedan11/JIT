@@ -401,7 +401,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("branch_name", branch.getBranch_name());
-        values.put("branch_location", branch.getLocation());
+        values.put("location", branch.getLocation());
         db.insert("Branch", null, values);
         db.close();
     }
