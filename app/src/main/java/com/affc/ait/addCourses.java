@@ -24,6 +24,7 @@ public class addCourses extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_courses);
+        btnAddCourse = findViewById(R.id.btnAddCourse);
 
 
         editTextCourseName = findViewById(R.id.courseName);
@@ -65,7 +66,7 @@ public class addCourses extends AppCompatActivity {
                 double courseFee = Double.parseDouble(courseFeeStr);
                 int maxParticipants = Integer.parseInt(maxParticipantsStr);
 
-                Course course = new Course(0, courseName, startDate, endDate, courseFee, description, maxParticipants);
+                Course course = new Course(courseName, startDate, endDate, courseFee, description, maxParticipants);
                 addCourseToDatabase(course);
             }
         });

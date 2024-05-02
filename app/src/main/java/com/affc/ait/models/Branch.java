@@ -12,6 +12,12 @@ public class Branch {
         this.location = location;
     }
 
+    public Branch(String branch_name, String location) {
+        this.branch_name = branch_name;
+        this.location = location;
+    }
+
+
     public int getBranch_id() {
         return branch_id;
     }
