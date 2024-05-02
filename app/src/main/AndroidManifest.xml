@@ -11,7 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AIT"
-        tools:targetApi="31">
+        tools:targetApi="31"
+        android:usesCleartextTraffic="true"
+        android:networkSecurityConfig="@xml/network_security_config"
+        >
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
 
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
@@ -30,11 +34,6 @@
 
         <activity android:name=".Home"
             android:exported="false" />
-        <activity
-            android:name=".MapsActivity"
-            android:exported="false"
-            android:label="@string/title_activity_maps" />
-
         <activity
             android:name=".AddBranch"
             android:exported="false" />

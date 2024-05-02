@@ -39,15 +39,10 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
-        Intent intent = getIntent();
-        if(intent.getData() !=null ) {
-            handleSignInIntent(intent);
-        }
-
     }
 
     public void handleSignInIntent(Intent intent) {
+        Log.d(TAG, "handleSignInIntent:" + intent);
         FirebaseAuth auth = FirebaseAuth.getInstance();
         String emailLink = intent.getData().toString();
 
@@ -96,7 +91,7 @@ public class Login extends AppCompatActivity {
                     ActionCodeSettings.newBuilder()
                             // URL you want to redirect back to. The domain (www.example.com) for this
                             // URL must be whitelisted in the Firebase Console.
-                            .setUrl("https://affc.page.link")
+                            .setUrl("https://jit-mad.firebaseapp.com/")
                             // This must be true
                             .setHandleCodeInApp(true)
                             .setIOSBundleId("com.affc.ait")
@@ -104,7 +99,9 @@ public class Login extends AppCompatActivity {
                                     "com.affc.ait",
                                     true, /* installIfNotAvailable */
                                     "12"    /* minimumVersion */)
+                            .setDynamicLinkDomain("affc.page.link")
                             .build();
+            Log.d(TAG, "action code settings built");
 
             FirebaseAuth auth = FirebaseAuth.getInstance();
             auth.sendSignInLinkToEmail(email, actionCodeSettings)
@@ -112,9 +109,13 @@ public class Login extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Log.d(TAG, "Email sent.");
+                                Log.d(TAG, "Email sent to " + email);
                             }
+                            Log.d(TAG, "inside onComplete");
                         }
+                    })
+                    .addOnFailureListener(e -> {
+                        Log.e(TAG, "Error sending email", e);
                     });
 
 
