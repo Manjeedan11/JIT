@@ -59,6 +59,8 @@ dependencies {
     implementation("com.google.android.gms:play-services-auth:21.1.0")
 
     implementation("com.github.dhaval2404:imagepicker:2.1")
+    implementation("com.squareup.picasso:picasso:2.71828")
+
 
 
 

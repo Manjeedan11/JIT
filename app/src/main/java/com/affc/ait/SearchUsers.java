@@ -1,29 +1,35 @@
 package com.affc.ait;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.affc.ait.db.DatabaseHandler;
 import com.affc.ait.models.Course;
 import com.affc.ait.models.Student;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class SearchUsers extends AppCompatActivity {
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState){
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_list);
 
@@ -32,14 +38,15 @@ public class SearchUsers extends AppCompatActivity {
         //to get all students and put into view
         List<Student> students = databaseHandler.fetchStudents();
         EditText searchbar = findViewById(R.id.searchUser);
-        if (students.size() == 0){
-            Toast.makeText( this,"No Users Found", Toast.LENGTH_SHORT).show();
-        }
-        else {
+
+        Log.d("TAG", "students: " + students.size());
+
+
+        if (students.size() == 0) {
+            Toast.makeText(this, "No Users Found", Toast.LENGTH_SHORT).show();
+        } else {
             renderStudents(students);
         }
-
-
 
 
         searchbar.addTextChangedListener(new TextWatcher() {
@@ -58,6 +65,7 @@ public class SearchUsers extends AppCompatActivity {
 
                 String query = searchbar.getText().toString();
                 List<Student> searchResults = runSearch(query);
+                renderStudents(searchResults);
             }
         });
 
@@ -70,54 +78,78 @@ public class SearchUsers extends AppCompatActivity {
     }
 
     private void renderStudents(List<Student> students) {
-        // clear any rendered students
-        LinearLayout linearLayout = findViewById(R.id.linearlayout); //Check ID with Isuru
+        // Clear any previously rendered students
+        LinearLayout linearLayout = findViewById(R.id.linearLayout);
         linearLayout.removeAllViews();
 
-        for (Student student: students){
-            // create a new Cardview
+        for (Student student : students) {
+            // Create a new CardView
             CardView cardView = new CardView(this);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
             );
+            layoutParams.setMargins(12, 12, 12, 12);
+            cardView.setLayoutParams(layoutParams);
 
-            params.setMargins(12,12,12,12); //Add margin to card view
-            cardView.setLayoutParams(params);
+            // Create a new RelativeLayout for the content inside the CardView
+            RelativeLayout relativeLayout = new RelativeLayout(this);
+            RelativeLayout.LayoutParams relativeLayoutParams = new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.MATCH_PARENT,
+                    RelativeLayout.LayoutParams.MATCH_PARENT
+            );
+            relativeLayout.setBackgroundColor(getResources().getColor(R.color.dark_blue));
 
-            //Set card corner radius and elevation
-            cardView.setRadius(12);
-            cardView.setCardElevation(6);
+            // Create ImageView for the student's image
+            ImageView imageView = new ImageView(this);
+            RelativeLayout.LayoutParams imageParams = new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.WRAP_CONTENT,
+                    RelativeLayout.LayoutParams.WRAP_CONTENT
+            );
+            imageView.setLayoutParams(imageParams);
+            imageView.setId(View.generateViewId()); // Generate unique ID for each view
+            //load in the image from the resource path stored in the student object
+            if (student.getProfilePicture() != null && !student.getProfilePicture().isEmpty()) {
+                String img_path = student.getProfilePicture();
+                //using 3rd party library to simplify it
+                Picasso.get().load(img_path).into(imageView);
+            } else {
+                imageView.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.user));
+            }
 
-            //create a LinearLayout for CardView context
-            LinearLayout innerLayout = new LinearLayout(this);
-            innerLayout.setLayoutParams(new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.MATCH_PARENT
-            ));
 
-            innerLayout.setOrientation(LinearLayout.VERTICAL);
-            innerLayout.setPadding(16,16,16,16); // add padding to the content
+            relativeLayout.addView(imageView);
 
-            //Create TextView for User name
-            TextView textViewUserName = new TextView(this);
-            textViewUserName.setLayoutParams(new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-            ));
+            // Create TextViews for student information
+            TextView nameTextView = createTextView(student.getName(), 80, 10);
+            TextView emailTextView = createTextView(student.getEmail(), 80, 30);
+            TextView phoneTextView = createTextView(student.getPhone(), 80, 50);
 
-            textViewUserName.setText(student.getName());
-            textViewUserName.setTextSize(20);
-            textViewUserName.setTextColor(ContextCompat.getColor(this,R.color.black));
+            // Add TextViews to RelativeLayout
+            relativeLayout.addView(nameTextView);
+            relativeLayout.addView(emailTextView);
+            relativeLayout.addView(phoneTextView);
 
-            // Add Textview to inner layout
-            innerLayout.addView(textViewUserName);
+            // Add RelativeLayout to CardView
+            cardView.addView(relativeLayout);
 
-            // Add inner layout to CardView
-            cardView.addView(innerLayout);
-
-            // Add CardView to the linearLayout
+            // Add CardView to LinearLayout
             linearLayout.addView(cardView);
         }
     }
+
+    private TextView createTextView(String text, int marginLeft, int marginTop) {
+        TextView textView = new TextView(this);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT
+        );
+        params.setMargins(marginLeft, marginTop, 0, 0);
+        textView.setLayoutParams(params);
+        textView.setText(text);
+        textView.setTextColor(getResources().getColor(R.color.white));
+        textView.setTextSize(18);
+        return textView;
+    }
+
 }
