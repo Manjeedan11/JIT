@@ -58,8 +58,6 @@
                 android:id="@+id/c1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
                 android:layout_margin="12dp"
                 android:elevation="6dp"
                 app:cardCornerRadius="15dp"
@@ -67,115 +65,157 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/color_scheme1"
-                    android:gravity="center"
-                    android:orientation="horizontal"
+                    android:gravity="top"
+                    android:orientation="vertical"
                     android:padding="16dp">
 
-                    <RelativeLayout
+                    <TextView
+                        android:id="@+id/courseName"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="wrap_content"
+                        android:text="### COURSE NAME ###"
+                        android:textSize="28sp"
+                        android:textColor="@color/white"
+                        />
+
+                    <TextView
+                        android:id="@+id/description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="### COURSE DESC ###"
+                        android:textSize="14sp"
+                        android:textColor="@color/white"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/courseName"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:gravity="center"
-                            android:text="##Course Name##"
-                            android:textColor="#FFC300"
-                            android:textSize="30sp"
-                            android:textStyle="bold" />
 
-                        <!-- Course Fee -->
-
-                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="95dp"
-                            android:gravity="center"
-                            android:text="Course Fee :"
+                            android:text="Starts on : "
+                            android:textSize="14sp"
                             android:textColor="@color/white"
-                            android:textSize="18sp" />
-
+                            />
                         <TextView
-                            android:id="@+id/courseFee"
-                            android:layout_width="160dp"
-                            android:layout_height="25dp"
-                            android:layout_marginLeft="118dp"
-                            android:layout_marginTop="95dp"
-                            android:text="####"
-                            android:textColor="@color/white"
-                            android:textSize="18sp" />
-
-                        <!-- Course Branches -->
-                        <TextView
+                            android:id="@+id/startingDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="120dp"
-                            android:gravity="center"
-                            android:text="Branches :"
+                            android:text="##DATE##"
+                            android:textSize="14sp"
                             android:textColor="@color/white"
-                            android:textSize="18sp" />
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/courseBranches"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="103dp"
-                            android:layout_marginTop="120dp"
-                            android:gravity="center"
-                            android:text="####"
-                            android:textColor="@color/white"
-                            android:textSize="18sp" />
 
-                        <!-- Course Starting on -->
-                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="170dp"
-                            android:gravity="center"
-                            android:text="Starting on :"
+                            android:text="Ends on: "
+                            android:textSize="14sp"
                             android:textColor="@color/white"
-                            android:textSize="18sp" />
+                            />
+                        <TextView
+                            android:id="@+id/endingDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="### DATE ###"
+                            android:textSize="14sp"
+                            android:textColor="@color/white"
+                            />
 
-                        <TextView
-                            android:id="@+id/courseStarting"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="110dp"
-                            android:layout_marginTop="170dp"
-                            android:gravity="center"
-                            android:text="####"
-                            android:textColor="@color/white"
-                            android:textSize="18sp" />
+                    </LinearLayout>
 
-                        <!-- Course Registration Closing date -->
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="220dp"
-                            android:gravity="center"
-                            android:text="Registration closing date :"
-                            android:textColor="@color/white"
-                            android:textSize="18sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/closingRegDate"
+
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="220dp"
-                            android:layout_marginTop="220dp"
-                            android:gravity="center"
-                            android:text="####"
+                            android:text="Max participants: "
+                            android:textSize="14sp"
                             android:textColor="@color/white"
-                            android:textSize="18sp" />
+                            />
+                        <TextView
+                            android:id="@+id/maxpp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="### MAX ###"
+                            android:textSize="14sp"
+                            android:textColor="@color/white"
+                            />
 
-                    </RelativeLayout>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Branches: "
+                            android:textSize="14sp"
+                            android:textColor="@color/white"
+                            />
+                        <TextView
+                            android:id="@+id/branches"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="### BRANCHES ###"
+                            android:textSize="14sp"
+                            android:textColor="@color/white"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Fee: "
+                            android:textSize="14sp"
+                            android:textColor="@color/white"
+                            />
+                        <TextView
+                            android:id="@+id/fee"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="### FEE ###"
+                            android:textSize="14sp"
+                            android:textColor="@color/white"
+                            />
+
+                    </LinearLayout>
+
+
+
+
+
+
 
                 </LinearLayout>
 

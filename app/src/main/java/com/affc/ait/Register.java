@@ -70,6 +70,7 @@ public class Register extends AppCompatActivity {
                 dbHandler.close();
                 if(id == -1){
                     showErrorMessage("Email already exists");
+                    return;
                 }
                 Intent intent = new Intent(this, SetupProfileActivity.class);
                 intent.putExtra("student_id", id);

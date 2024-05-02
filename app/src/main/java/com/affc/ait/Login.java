@@ -50,4 +50,14 @@ public class Login extends AppCompatActivity {
 
     }
 
+    private void sendLoginCode(View view) {
+        Log.d(TAG, "login code");
+    }
+
+    public void redirect(View view) {
+        Intent intent = new Intent();
+        intent.setClass(this, Register.class);
+        startActivity(intent);
+    }
+
 }

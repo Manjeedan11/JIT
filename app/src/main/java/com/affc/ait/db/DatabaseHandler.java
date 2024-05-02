@@ -190,10 +190,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return 1;
     }
 
-    public List<Branch> getBranchesForACourse(Course course) {
+    public List<Branch> getBranchesForACourse(int course_id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT branch_ID FROM Branch_Course where course_ID = ?", new String[]{String.valueOf(course.getCourse_ID())});
+        Cursor cursor = db.rawQuery("SELECT branch_ID FROM Branch_Course where course_ID = ?", new String[]{String.valueOf(course_id)});
         List<Integer> branch_IDs = new ArrayList<>();
         if (cursor.moveToFirst()) {
             do {

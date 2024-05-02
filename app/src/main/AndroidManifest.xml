@@ -40,12 +40,7 @@
 
         <activity
             android:name=".Home"
-            android:exported="true">
-            <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
-
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
+            android:exported="false">
         </activity>
         <activity
             android:name=".AddBranch"
@@ -55,15 +50,16 @@
             android:exported="false" />
         <activity
             android:name=".Register"
-            android:exported="false" />
-        <activity
-            android:name=".AdminDashboard"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
 
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".AdminDashboard"
+            android:exported="false">
         </activity>
         <activity
             android:name=".SetupProfileActivity"
