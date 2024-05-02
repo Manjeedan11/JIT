@@ -3,6 +3,8 @@ package com.affc.ait.models;
 import android.graphics.Picture;
 import android.graphics.drawable.PictureDrawable;
 
+import com.affc.ait.utils.OTPGenerator;
+
 public class Student {
 
     private int id;
@@ -15,15 +17,25 @@ public class Student {
     private String gender;
     private String DOB;
 
-    private byte[] profilePicture;
+    private String profilePicture;
 
-    public byte[] getProfilePicture() {
+    //path
+    public String getProfilePicture() {
         return profilePicture;
     }
 
-    public void setProfilePicture(byte[] profilePicture) {
+    public void setProfilePicture(int id, String profilePicture) {
+
+        this.id = id;
         this.profilePicture = profilePicture;
+
     }
+
+    public Student(int id) {
+        this.id = id;
+    }
+
+
 
     public Student(String name, String email, String address, String city, String phone, String gender, String DOB) {
         this.name = name;
@@ -36,7 +48,7 @@ public class Student {
         this.DOB = DOB;
     }
 
-    public Student(int id, String name, String email, String address, String city, String phone, String gender, String DOB, byte[] profilePicture) {
+    public Student(int id, String name, String email, String address, String city, String phone, String gender, String DOB,String profilePicture) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -136,9 +148,12 @@ public class Student {
     }
 
     public String generateLoginCode(){
-        //TODO generate login code. sending it is handled by another class
-        return " ";
+        OTPGenerator otpGenerator = new OTPGenerator();
+        return otpGenerator.generateOTP();
+
     }
+
+
 
 
 }

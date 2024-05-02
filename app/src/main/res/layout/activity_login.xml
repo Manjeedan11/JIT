@@ -68,7 +68,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Enter the Code"
+                android:text="Enter your email"
                 android:textStyle="bold"
                 android:textSize="20dp"
                 android:alpha="0.9"
@@ -76,7 +76,7 @@
                 android:textColor="#FFFFFF"/>
 
             <EditText
-                android:id="@+id/verifyCode"
+                android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
@@ -103,33 +103,7 @@
                     android:layout_marginEnd="110dp"
                     android:backgroundTint="#FDAF7B"
                     android:text="LOGIN"
-                    android:textAlignment="center"
-                    android:textColor="#494949"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginTop="600dp"
-                    android:alpha="0.9"
-                    android:padding="16dp"
-                    android:text="Didn't receive it ?"
-                    android:textAlignment="center"
-                    android:textSize="18dp"
-                    android:textColor="#FFFFFF"
-                    android:textStyle="bold" />
-
-                <Button
-                    android:id="@+id/btn_resendCode"
-                    android:layout_width="105dp"
-                    android:layout_height="50dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="200dp"
-                    android:layout_marginEnd="118dp"
-                    android:backgroundTint="#FDAF7B"
-                    android:text="RESEND"
+                    android:onClick="sendLoginCode"
                     android:textAlignment="center"
                     android:textColor="#494949"
                     android:textStyle="bold" />

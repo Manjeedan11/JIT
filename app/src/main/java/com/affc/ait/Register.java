@@ -23,6 +23,8 @@ public class Register extends AppCompatActivity {
     Database_OLDCODE dbHelper;
     String[] genders = {"Male", "Female", "Other"};
 
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -64,9 +66,13 @@ public class Register extends AppCompatActivity {
             Student student = new Student(name, email, address, city,phone,gender,dob);
             try{
                 DatabaseHandler dbHandler = new DatabaseHandler(this);
-                dbHandler.addStudent(student);
+                long id = dbHandler.addStudent(student);
                 dbHandler.close();
-                Intent intent = new Intent(this, Login.class);
+                if(id == -1){
+                    showErrorMessage("Email already exists");
+                }
+                Intent intent = new Intent(this, SetupProfileActivity.class);
+                intent.putExtra("student_id", id);
                 startActivity(intent);
             } catch (Exception e) {
                 showErrorMessage(e.getMessage());
