@@ -44,16 +44,11 @@
             android:name=".Register"
             android:exported="false" />
         <activity
-            android:name=".AdminLogin"
+            android:name=".AdminDashboard"
             android:exported="false" />
         <activity
             android:name=".SetupProfileActivity"
             android:exported="false" />
-        <activity
-            android:name=".AdminDashboard"
-            android:exported="false">
-
-        </activity>
         <activity android:name=".Login"
             android:exported="true">
             <intent-filter>
@@ -62,6 +57,9 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".AdminLogin"
+            android:exported="false"/>
 
         <meta-data
             android:name="preloaded_fonts"

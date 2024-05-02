@@ -117,8 +117,8 @@
             android:layout_margin="10dp"
             android:padding="10dp"
             android:textColorHint="@color/white"
-            android:textColor="@color/white"
-            />
+            android:textColor="@color/white">
+        </Spinner>
 
         <EditText
             android:id="@+id/publishDate"
@@ -135,6 +135,7 @@
             />
 
         <Button
+            android:id="@+id/btnAddCourse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/dark_blue"
