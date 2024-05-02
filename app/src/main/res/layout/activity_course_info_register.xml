@@ -116,7 +116,7 @@
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="120dp"
                             android:gravity="center"
-                            android:text="Branche :"
+                            android:text="Branch :"
                             android:textColor="@color/white"
                             android:textSize="18sp" />
 
