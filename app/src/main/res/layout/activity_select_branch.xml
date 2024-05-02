@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#242424">
-    <!--tools:context=".register_course"-->
 
     <ScrollView
         android:layout_width="match_parent"
@@ -18,23 +17,21 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="0dp">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="32dp"
-                android:layout_marginRight="20dp">
+                android:layout_marginEnd="20dp">
 
                 <ImageView
                     android:id="@+id/account_image"
                     android:layout_width="62dp"
                     android:layout_height="62dp"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     android:src="@drawable/baseline_align_horizontal_right_24" />
 
                 <TextView
@@ -50,54 +47,18 @@
 
             </RelativeLayout>
 
-            <com.google.android.gms.maps.MapView
-                android:id="@+id/mapView"
+            <LinearLayout
+                android:id="@+id/branchLayout"
                 android:layout_width="match_parent"
-                android:layout_height="300dp" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_Colombo"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_margin="12dp"
-                android:elevation="6dp"
-                app:cardCornerRadius="15dp"
-                app:cardElevation="20dp">
+                android:orientation="vertical">
 
-                <LinearLayout
+                <com.google.android.gms.maps.MapView
+                    android:id="@+id/mapView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/color_scheme1"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="16dp">
+                    android:layout_height="300dp" />
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="60dp"
-                            android:layout_alignParentLeft="true"
-                            android:src="@drawable/location_logo" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:text="Colombo"
-                            android:textColor="#FFFFFF"
-                            android:textSize="25sp"
-                            android:textStyle="bold"
-                            android:gravity="center|bottom"/>
-
-                    </RelativeLayout>
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
+            </LinearLayout>
 
         </LinearLayout>
 

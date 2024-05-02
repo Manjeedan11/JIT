@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Button;
 
@@ -53,7 +52,7 @@ public class CourseInfo extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(CourseInfo.this, selectBranch.class));
+                startActivity(new Intent(CourseInfo.this, SelectBranch.class));
             }
         });
 
