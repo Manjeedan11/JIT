@@ -238,7 +238,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public long addStudent(Student student) {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM Student WHERE email = ?", new String[]{student.getEmail()});
+        Cursor cursor = db.rawQuery("SELECT student_ID FROM Student WHERE email = ?", new String[]{student.getEmail()});
         if (cursor.getCount() > 0) {
             cursor.close();
             db.close();

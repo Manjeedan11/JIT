@@ -31,7 +31,7 @@
 
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imageView"
+        android:id="@+id/profilePicture"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_marginTop="75dp"
@@ -64,6 +64,7 @@
         app:cornerRadius="10dp"
         android:textColor="@color/white"
         android:padding="10dp"
+        android:onClick="completeSelection"
         />
 
         <Button

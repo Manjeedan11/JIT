@@ -1,7 +1,11 @@
 package com.affc.ait;
 
 
+import static android.content.ContentValues.TAG;
+
 import android.Manifest;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -13,7 +17,10 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.affc.ait.db.DatabaseHandler;
 
@@ -24,6 +31,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import com.github.dhaval2404.imagepicker.ImagePicker;
+
+
 public class SetupProfileActivity extends AppCompatActivity {
 
     private long id;
@@ -31,6 +41,7 @@ public class SetupProfileActivity extends AppCompatActivity {
     private static final int REQUEST_IMAGE_PICK = 102;
     private static final int PERMISSION_REQUEST_CODE = 200;
 
+    private String path;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,54 +56,49 @@ public class SetupProfileActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void openSelector(View view){
+        ImagePicker.with(this)
+                .crop()
+                .compress(1024)
+                .maxResultSize(1080, 1080)
+                .start();
+    }
+
+    public void completeSelection(View view) {
+        if (path == null) {
+            showErrorMessage("Please select a profile picture");
+            return;
+        }
+        Log.e(TAG, path);
+        saveImagePathToDatabase(path);
+        Intent intent = new Intent(this, Login.class);
+        startActivity(intent);
+
+    }
+
+    private void showErrorMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+
+    }
+
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        ImageView imageView = findViewById(R.id.profilePicture);
         super.onActivityResult(requestCode, resultCode, data);
+        try {
+            assert data != null;
+            Uri uri = data.getData();
+            imageView.setBackground(null);
+            path = uri.getPath();
+            imageView.setImageURI(uri);
 
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == REQUEST_IMAGE_CAPTURE) {
-                Bitmap imageBitmap = (Bitmap) data.getExtras().get("data");
-                saveImageToStorage(imageBitmap);
-            } else if (requestCode == REQUEST_IMAGE_PICK) {
-                Uri selectedImageUri = data.getData();
-                saveImageToStorage(selectedImageUri);
-            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    private void saveImageToStorage(Object imageData) {
-        if (imageData != null) {
-            OutputStream outputStream;
-            String imageFileName = "IMG_" + System.currentTimeMillis() + ".jpg";
-            File storageDir = getExternalFilesDir(android.os.Environment.DIRECTORY_PICTURES);
 
-            if (imageData instanceof Bitmap) {
-                Bitmap imageBitmap = (Bitmap) imageData;
-                File imageFile = new File(storageDir, imageFileName);
-                try {
-                    outputStream = new FileOutputStream(imageFile);
-                    imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
-                    outputStream.close();
-                    // Save image path to database
-                    saveImagePathToDatabase(imageFile.getAbsolutePath());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } else if (imageData instanceof Uri) {
-                Uri selectedImageUri = (Uri) imageData;
-                File imageFile = new File(storageDir, imageFileName);
-                try {
-                    outputStream = new FileOutputStream(imageFile);
-                    outputStream.write(getBytesFromUri(selectedImageUri));
-                    outputStream.close();
-                    // Save image path to database
-                    saveImagePathToDatabase(imageFile.getAbsolutePath());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
     private void saveImagePathToDatabase(String imagePath) {
         if(id == -1) {
             return;
@@ -100,21 +106,5 @@ public class SetupProfileActivity extends AppCompatActivity {
         DatabaseHandler dbHandler = new DatabaseHandler(this);
         dbHandler.addProfilePicture((int) id, imagePath);
     }
-
-    private byte[] getBytesFromUri(Uri uri) throws IOException {
-        try (InputStream inputStream = getContentResolver().openInputStream(uri)) {
-            ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream();
-            int bufferSize = 1024;
-            byte[] buffer = new byte[bufferSize];
-            int len;
-            while ((len = inputStream.read(buffer)) != -1) {
-                byteBuffer.write(buffer, 0, len);
-            }
-            return byteBuffer.toByteArray();
-        }
-    }
-
-
-
 
 }

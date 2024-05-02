@@ -91,7 +91,7 @@
                 android:id="@+id/dob"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Date of Birth (yyyy-mm-dd)"
+                android:hint="Date of Birth (mm/dd/yyyy)"
                 android:padding="10dp"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"
