@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Button;
 
 import com.affc.ait.db.DatabaseHandler;
 import com.affc.ait.models.Branch;
@@ -20,6 +22,8 @@ public class CourseInfo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_info);
+
+        Button btnRegister = findViewById(R.id.registerCourse);
 
         Intent intent = getIntent();
         int courseID = intent.getIntExtra("course_ID", -1);
@@ -46,6 +50,13 @@ public class CourseInfo extends AppCompatActivity {
         maxParticipantsView.setText(String.valueOf(maxParticipants));
         searchForBranches(courseID);
 
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(CourseInfo.this, selectBranch.class));
+            }
+        });
+
     }
 
     private void searchForBranches(int courseID) {
@@ -63,4 +74,6 @@ public class CourseInfo extends AppCompatActivity {
 
 
     }
+
+
 }

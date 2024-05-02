@@ -17,6 +17,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".selectBranch"
+            android:exported="false" />
+        <activity
             android:name=".CourseInfo"
             android:exported="false" />
 
@@ -39,9 +42,8 @@
             android:value="YOUR_API_KEY" />
 
         <activity
-            android:name=".Home"
-            android:exported="false">
-        </activity>
+            android:name=".SearchUsers"
+            android:exported="false"></activity>
         <activity
             android:name=".AddBranch"
             android:exported="false" />
@@ -50,24 +52,21 @@
             android:exported="false" />
         <activity
             android:name=".Register"
-            android:exported="true" >
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".AdminDashboard"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".SetupProfileActivity"
             android:exported="false" />
         <activity
             android:name=".Login"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".AdminLogin"
             android:exported="false" />
-
-        <activity android:name=".SearchUsers"
+        <activity
+            android:name=".Home"
             android:exported="true">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
