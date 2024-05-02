@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "406833640008",
+    "project_id": "jit-mad",
+    "storage_bucket": "jit-mad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:406833640008:android:b696933409a4628c871e7d",
+        "android_client_info": {
+          "package_name": "com.affc.ait"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqxdGM5hkLnyen2BgUDGz7Z7tCtNEXWRE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

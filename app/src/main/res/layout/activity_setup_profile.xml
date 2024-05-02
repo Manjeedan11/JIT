@@ -50,6 +50,7 @@
         android:textColor="@color/white"
         android:padding="10dp"
         app:cornerRadius="10dp"
+        android:onClick="openSelector"
         />
 
     <Button
@@ -76,6 +77,7 @@
             app:cornerRadius="10dp"
             android:textColor="@color/white"
             android:padding="10dp"
+            android:onClick="redirectToLogin"
             />
 
 
