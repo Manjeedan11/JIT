@@ -11,7 +11,10 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.affc.ait.db.DatabaseHandler;
+import com.affc.ait.models.Branch;
 import com.affc.ait.models.Course;
+
+import java.util.List;
 
 public class addCourses extends AppCompatActivity {
 
@@ -78,5 +81,12 @@ public class addCourses extends AppCompatActivity {
         DatabaseHandler dbHandler = new DatabaseHandler(this);
         dbHandler.addCourse(course);
         Toast.makeText(this, "Course added successfully!", Toast.LENGTH_SHORT).show();
+    }
+
+    private List<Branch> loadBranches() {
+
+        DatabaseHandler dbHandler = new DatabaseHandler(this);
+        return dbHandler.fetchBranches();
+
     }
 }

@@ -488,7 +488,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
     }
 
-    public List<Branch> fetchBranch() {
+    public List<Branch> fetchBranches() {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.rawQuery("SELECT * FROM Branch", null);
