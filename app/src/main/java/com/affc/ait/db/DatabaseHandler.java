@@ -488,5 +488,26 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
     }
 
+    public List<Branch> fetchBranch() {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM Branch", null);
+        List<Branch> courses = new ArrayList<Branch>();
+
+        if (cursor.moveToFirst()) {
+            do {
+                Branch contact = new Branch(Integer.parseInt(cursor.getString(0)),
+                        cursor.getString(1),
+                        cursor.getString(2)
+                );
+                courses.add(contact);
+            } while (cursor.moveToNext());
+        }
+
+        // return contact list
+        cursor.close();
+        return courses;
+    }
+
 
 }

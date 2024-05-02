@@ -64,15 +64,17 @@
             android:exported="true" />
         <activity
             android:name=".AdminLogin"
-            android:exported="false" />
-        <activity
-            android:name=".Home"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
 
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".Home"
+            android:exported="true">
+
         </activity>
 
         <meta-data
