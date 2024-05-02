@@ -444,20 +444,25 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public boolean authAdmin(String email, String password) {
         SQLiteDatabase db = this.getReadableDatabase();
+        String passwordHash = getPasswordHash(password);
 
-        String password_hash = getPasswordHash(password);
+        String[] projection = {"admin_email"};
+        String selection = "admin_email = ? AND admin_password = ?";
+        String[] selectionArgs = {email, passwordHash};
 
-        Cursor cursor = db.query("Student", new String[]{"id"}, "email=? AND password=?",
-                new String[]{email, password_hash}, null, null, null, null);
-        if (cursor.getCount()  >= 1) {
-            cursor.close();
-            return true;
-        } else {
-            return false;
-        }
+        Cursor cursor = db.query("Admin", projection, selection, selectionArgs, null, null, null);
+
+        boolean isAdminExists = cursor.getCount() > 0;
+
+        cursor.close();
+        db.close();
+
+        return isAdminExists;
     }
 
-    private String getPasswordHash(String password) {
+
+
+    public String getPasswordHash(String password) {
         try {
             // Create a MessageDigest instance for SHA-256
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
