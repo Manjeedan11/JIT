@@ -1,8 +1,10 @@
 package com.affc.ait;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.GridLayout;
@@ -108,6 +110,20 @@ public class Home extends AppCompatActivity {
             // Add TextView to inner layout
             innerLayout.addView(textViewCourseName);
 
+            cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(Home.this, CourseInfo.class);
+                    intent.putExtra("course_ID", course.getCourse_ID());
+                    intent.putExtra("course_name", course.getCourse_name());
+                    intent.putExtra("start_date", course.getStart_date());
+                    intent.putExtra("end_date", course.getEnd_date());
+                    intent.putExtra("fee", course.getFee());
+                    intent.putExtra("description", course.getDescription());
+                    intent.putExtra("max_p", course.getMax_p());
+                    startActivity(intent);
+                }
+            });
             // Add inner layout to CardView
             cardView.addView(innerLayout);
 

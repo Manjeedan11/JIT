@@ -116,7 +116,7 @@
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="120dp"
                             android:gravity="center"
-                            android:text="Branch :"
+                            android:text="Branches :"
                             android:textColor="@color/white"
                             android:textSize="18sp" />
 
@@ -126,28 +126,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="103dp"
                             android:layout_marginTop="120dp"
-                            android:gravity="center"
-                            android:text="####"
-                            android:textColor="@color/white"
-                            android:textSize="18sp" />
-
-                        <!-- Course Duration -->
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="145dp"
-                            android:gravity="center"
-                            android:text="Duration :"
-                            android:textColor="@color/white"
-                            android:textSize="18sp" />
-
-                        <TextView
-                            android:id="@+id/courseDuration"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="91dp"
-                            android:layout_marginTop="145dp"
                             android:gravity="center"
                             android:text="####"
                             android:textColor="@color/white"
@@ -170,28 +148,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="110dp"
                             android:layout_marginTop="170dp"
-                            android:gravity="center"
-                            android:text="####"
-                            android:textColor="@color/white"
-                            android:textSize="18sp" />
-
-                        <!-- Course Published on -->
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="195dp"
-                            android:gravity="center"
-                            android:text="Published on :"
-                            android:textColor="@color/white"
-                            android:textSize="18sp" />
-
-                        <TextView
-                            android:id="@+id/coursePublished"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="127dp"
-                            android:layout_marginTop="195dp"
                             android:gravity="center"
                             android:text="####"
                             android:textColor="@color/white"
