@@ -190,10 +190,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return 1;
     }
 
-    public List<Branch> getBranchesForACourse(Course course) {
+    public List<Branch> getBranchesForACourse(int course_id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT branch_ID FROM Branch_Course where course_ID = ?", new String[]{String.valueOf(course.getCourse_ID())});
+        Cursor cursor = db.rawQuery("SELECT branch_ID FROM Branch_Course where course_ID = ?", new String[]{String.valueOf(course_id)});
         List<Integer> branch_IDs = new ArrayList<>();
         if (cursor.moveToFirst()) {
             do {
@@ -401,7 +401,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("branch_name", branch.getBranch_name());
-        values.put("branch_location", branch.getLocation());
+        values.put("location", branch.getLocation());
         db.insert("Branch", null, values);
         db.close();
     }

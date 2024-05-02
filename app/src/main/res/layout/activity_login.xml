@@ -108,6 +108,21 @@
                     android:textColor="#494949"
                     android:textStyle="bold" />
 
+                <Button
+                    android:id="@+id/redirectToRegister"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@id/btn_sendCode"
+                    android:backgroundTint="@android:color/transparent"
+                    android:text="Make an Account"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:onClick="redirect"
+                    />
+
             </RelativeLayout>
 
 

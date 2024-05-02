@@ -40,8 +40,7 @@
 
         <activity
             android:name=".Home"
-            android:exported="true">
-
+            android:exported="false">
         </activity>
         <activity
             android:name=".AddBranch"
@@ -51,21 +50,12 @@
             android:exported="false" />
         <activity
             android:name=".Register"
-            android:exported="true">
-            <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
+            android:exported="true" >
 
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".AdminDashboard"
-            android:exported="true">
-            <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
-
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
+            android:exported="false">
         </activity>
         <activity
             android:name=".SetupProfileActivity"
@@ -76,6 +66,15 @@
         <activity
             android:name=".AdminLogin"
             android:exported="false" />
+
+        <activity android:name=".SearchUsers"
+            android:exported="true">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
 
         <meta-data
             android:name="preloaded_fonts"

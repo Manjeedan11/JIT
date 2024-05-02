@@ -51,25 +51,12 @@
             android:drawablePadding="10dp"
             android:layout_marginTop="20dp"/>
 
-        <EditText
-            android:id="@+id/branchCode"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Branch Code"
-            android:layout_margin="10dp"
-            android:padding="10dp"
-            android:textColorHint="@color/white"
-            android:textColor="@color/white"
-            android:inputType="text"
-            android:drawablePadding="10dp"
-            android:layout_marginTop="20dp"/>
-
 
         <EditText
             android:id="@+id/link"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
+            android:inputType="text"
             android:hint="Link"
             android:layout_margin="10dp"
             android:padding="10dp"

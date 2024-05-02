@@ -4,11 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.affc.ait.db.DatabaseHandler;
+import com.affc.ait.models.Branch;
+
+import java.util.List;
 
 public class CourseInfo extends AppCompatActivity {
 
-    TextView courseNameView, courseBranchesView, startDateView, endDateView, feeView, descriptionView, maxParticipantsView;
+    TextView courseNameView,startDateView, endDateView, feeView, descriptionView, maxParticipantsView, courseBranchesView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,12 +31,35 @@ public class CourseInfo extends AppCompatActivity {
         int maxParticipants = intent.getIntExtra("max_p", -1);
 
         courseNameView = findViewById(R.id.courseName);
-        startDateView = findViewById(R.id.courseStarting);
-        endDateView = findViewById(R.id.closingRegDate);
-        feeView = findViewById(R.id.courseFee);
+        startDateView = findViewById(R.id.startingDate);
+        endDateView = findViewById(R.id.endingDate);
+        feeView = findViewById(R.id.fee);
         descriptionView = findViewById(R.id.description);
         maxParticipantsView = findViewById(R.id.maxpp);
-        courseBranchesView = findViewById(R.id.courseBranches);
+        courseBranchesView = findViewById(R.id.branches);
+
+        courseNameView.setText(courseName);
+        startDateView.setText(startDate);
+        endDateView.setText(endDate);
+        feeView.setText(String.valueOf(fee));
+        descriptionView.setText(description);
+        maxParticipantsView.setText(String.valueOf(maxParticipants));
+        searchForBranches(courseID);
+
+    }
+
+    private void searchForBranches(int courseID) {
+        DatabaseHandler db = new DatabaseHandler(this);
+
+        List<Branch> branches = db.getBranchesForACourse(courseID);
+        if (branches.size() > 0) {
+            for (Branch branch : branches) {
+                courseBranchesView.append(branch.getBranch_name() + "\n");
+            }
+        }
+        else {
+            courseBranchesView.setText("No branches found for this course");
+        }
 
 
     }

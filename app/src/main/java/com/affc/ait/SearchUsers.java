@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.affc.ait.db.DatabaseHandler;
 import com.affc.ait.models.Course;
@@ -31,8 +32,15 @@ public class SearchUsers extends AppCompatActivity {
         //to get all students and put into view
         List<Student> students = databaseHandler.fetchStudents();
         EditText searchbar = findViewById(R.id.searchUser);
+        if (students.size() == 0){
+            Toast.makeText( this,"No Users Found", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            renderStudents(students);
+        }
 
-        renderStudents(students);
+
+
 
         searchbar.addTextChangedListener(new TextWatcher() {
             @Override
