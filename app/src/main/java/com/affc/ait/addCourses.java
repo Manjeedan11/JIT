@@ -56,6 +56,7 @@ public class addCourses extends AppCompatActivity {
                 String publishDate = editTextPublishDate.getText().toString().trim();
                 String selectedBranch = spinnerBranches.getSelectedItem().toString();
 
+                //TODO: add validation, like start date < end date etc
                 if (courseName.isEmpty() || description.isEmpty() || startDate.isEmpty() ||
                         endDate.isEmpty() || courseFeeStr.isEmpty() || maxParticipantsStr.isEmpty() ||
                         publishDate.isEmpty()) {

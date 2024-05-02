@@ -23,7 +23,7 @@ public class AdminLogin extends AppCompatActivity {
         editTextUsername = findViewById(R.id.username);
         editTextPassword = findViewById(R.id.password);
         btnAdminLogin = findViewById(R.id.btn_adminLogin);
-
+        insertAdmin();
         btnAdminLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
