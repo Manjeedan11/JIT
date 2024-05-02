@@ -10,6 +10,16 @@ public class Course {
     private String description;
     private int max_p;
 
+    public Course(int id, String course_name, String start_date, String end_date, double fee, String description, int max_p) {
+        this.course_ID = id;
+        this.course_name = course_name;
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.fee = fee;
+        this.description = description;
+        this.max_p = max_p;
+    }
+
     public Course( String course_name, String start_date, String end_date, double fee, String description, int max_p) {
         this.course_name = course_name;
         this.start_date = start_date;
