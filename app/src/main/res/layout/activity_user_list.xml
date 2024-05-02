@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#242424">
-    <!--tools:context=".register_course"-->
+    android:background="#242424"
+    tools:context=".SearchUsers">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -39,7 +39,7 @@
                     android:textSize="28sp"
                     android:layout_centerHorizontal="true"
                     android:gravity="center_horizontal"
-                    android:id="@+id/selectCourse"/>
+                    android:id="@+id/userList"/>
 
                 <EditText
                     android:layout_width="400dp"

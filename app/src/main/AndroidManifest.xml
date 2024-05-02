@@ -41,7 +41,7 @@
             android:name=".addCourses"
             android:exported="false" />
         <activity
-            android:name=".AdminDashboard"
+            android:name=".Register"
             android:exported="false" />
         <activity
             android:name=".AdminLogin"
@@ -50,7 +50,7 @@
             android:name=".SetupProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".Register"
+            android:name=".AdminDashboard"
             android:exported="true">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
