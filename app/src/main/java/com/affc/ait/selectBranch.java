@@ -1,19 +1,60 @@
 package com.affc.ait;
 
 import android.os.Bundle;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.cardview.widget.CardView;
 
-public class selectBranch extends AppCompatActivity {
+import com.affc.ait.db.DatabaseHandler;
+import com.affc.ait.models.Branch;
+
+import java.util.List;
+
+public class SelectBranch extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_select_branch);
+
+
+        DatabaseHandler databaseHandler = new DatabaseHandler(this);
+        List<Branch> branches = databaseHandler.fetchAllBranches();
+        renderBranches(branches);
+    }
+
+    private void renderBranches(List<Branch> branches) {
+        LinearLayout linearLayout = findViewById(R.id.linearlayout);
+
+        for (Branch branch : branches) {
+
+            CardView cardView = new CardView(this);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+            params.setMargins(12, 12, 12, 12);
+            cardView.setLayoutParams(params);
+
+
+            cardView.setRadius(15);
+            cardView.setCardElevation(6);
+
+
+            TextView textViewBranchName = new TextView(this);
+            textViewBranchName.setLayoutParams(new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            ));
+            textViewBranchName.setText(branch.getBranch_name());
+            textViewBranchName.setTextSize(20);
+            textViewBranchName.setPadding(16, 16, 16, 16);
+
+            cardView.addView(textViewBranchName);
+
+            linearLayout.addView(cardView);
+        }
     }
 }
