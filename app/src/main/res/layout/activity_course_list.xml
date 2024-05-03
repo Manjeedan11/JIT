@@ -18,12 +18,15 @@
             android:layout_marginTop="32dp"
             android:layout_marginRight="20dp">
 
-            <ImageView
-                android:id="@+id/account_image"
+            <ImageButton
+                android:id="@+id/hamburger"
                 android:layout_width="62dp"
                 android:layout_height="62dp"
                 android:layout_alignParentRight="true"
-                android:src="@drawable/baseline_align_horizontal_right_24" />
+                android:src="@drawable/menu_icon"
+                android:backgroundTint="@android:color/transparent"
+                />
+
 
             <TextView
                 android:id="@+id/selectCourse"

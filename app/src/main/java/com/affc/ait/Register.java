@@ -20,7 +20,6 @@ import java.time.LocalDate;
 import java.util.Date;
 
 public class Register extends AppCompatActivity {
-    Database_OLDCODE dbHelper;
     String[] genders = {"Male", "Female", "Other"};
 
 
@@ -30,7 +29,6 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, genders);
         setContentView(R.layout.activity_register);
-        dbHelper = new Database_OLDCODE(this);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner spinner = findViewById(R.id.gender);
         spinner.setAdapter(adapter);

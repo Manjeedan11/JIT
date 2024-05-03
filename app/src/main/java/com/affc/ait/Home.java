@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.GridLayout;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +26,7 @@ import com.affc.ait.models.Course;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Home extends AppCompatActivity {
+public class Home extends AppCompatActivity{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
@@ -31,6 +34,44 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_course_list);
 
         DatabaseHandler databaseHandler = new DatabaseHandler(this);
+
+        ImageButton button = findViewById(R.id.hamburger);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Initializing the popup menu and giving the reference as current context
+                PopupMenu popupMenu = new PopupMenu(Home.this, button);
+
+                // Inflating popup menu from popup_menu.xml file
+                popupMenu.getMenuInflater().inflate(R.menu.nav_menu_silder, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        // Toast message on menu item clicked
+                        String title = (String) menuItem.getTitle();
+                        if (title.equals("Login")) {
+                            Intent intent = new Intent(Home.this, Login.class);
+                            startActivity(intent);
+                        } else if (title.equals("Register")) {
+                            Intent intent = new Intent(Home.this, Register.class);
+                            startActivity(intent);
+                        } else if (title.equals("Courses")) {
+                            Intent intent = new Intent(Home.this, Home.class);
+                            startActivity(intent);
+                        } else if (title.equals("Logout")) {
+
+                        } else if (title.equals("Admin")) {
+                            Intent intent = new Intent(Home.this, AdminLogin.class);
+                            startActivity(intent);
+                        }
+
+                        return true;
+                    }
+                });
+                // Showing the popup menu
+                popupMenu.show();
+            }
+        });
 
         //get all courses and put into view
         List<Course> courses = databaseHandler.fetchCourses();
@@ -133,4 +174,12 @@ public class Home extends AppCompatActivity {
         }
 
     }
+<<<<<<< HEAD
 }
+=======
+
+
+}
+
+
+>>>>>>> 11895ebff1d22a6737ec9e3a0eaeb24303e3716b
