@@ -14,6 +14,7 @@ import com.affc.ait.db.DatabaseHandler;
 import com.affc.ait.models.Branch;
 import com.affc.ait.models.Course;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class addCourses extends AppCompatActivity {
@@ -27,9 +28,8 @@ public class addCourses extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_courses);
+
         btnAddCourse = findViewById(R.id.btnAddCourse);
-
-
         editTextCourseName = findViewById(R.id.courseName);
         editTextDescription = findViewById(R.id.description);
         editTextStartDate = findViewById(R.id.startDate);
@@ -38,14 +38,8 @@ public class addCourses extends AppCompatActivity {
         editTextMaxParticipants = findViewById(R.id.maxpp);
         editTextPublishDate = findViewById(R.id.publishDate);
         spinnerBranches = findViewById(R.id.branches);
-        btnAddCourse = findViewById(R.id.btnAddCourse);
 
-
-        String[] branches = {"Mathara", "Kandy", "Negombo", "Colombo", "Jaffna", "Kegalle", "Piliyandala", "Kottawa"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, branches);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerBranches.setAdapter(adapter);
-
+        loadBranches();
 
         btnAddCourse.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,17 +70,23 @@ public class addCourses extends AppCompatActivity {
         });
     }
 
+    private void loadBranches() {
+        DatabaseHandler dbHandler = new DatabaseHandler(this);
+        List<Branch> branches = dbHandler.fetchBranches();
+
+        List<String> branchNames = new ArrayList<>();
+        for (Branch branch : branches) {
+            branchNames.add(branch.getBranch_name());
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, branchNames);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerBranches.setAdapter(adapter);
+    }
 
     private void addCourseToDatabase(Course course) {
         DatabaseHandler dbHandler = new DatabaseHandler(this);
         dbHandler.addCourse(course);
         Toast.makeText(this, "Course added successfully!", Toast.LENGTH_SHORT).show();
-    }
-
-    private List<Branch> loadBranches() {
-
-        DatabaseHandler dbHandler = new DatabaseHandler(this);
-        return dbHandler.fetchBranches();
-
     }
 }

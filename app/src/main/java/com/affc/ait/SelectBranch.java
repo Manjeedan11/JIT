@@ -19,17 +19,19 @@ public class SelectBranch extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_branch);
 
-
         DatabaseHandler databaseHandler = new DatabaseHandler(this);
         List<Branch> branches = databaseHandler.fetchBranches();
+<<<<<<< HEAD
+
+=======
+>>>>>>> eeb1aee9c29cef343fc35d5f94cbcbd56bc5a214
         renderBranches(branches);
     }
 
     private void renderBranches(List<Branch> branches) {
-        LinearLayout linearLayout = findViewById(R.id.linearlayout);
+        LinearLayout branchLayout = findViewById(R.id.branchLayout);
 
         for (Branch branch : branches) {
-
             CardView cardView = new CardView(this);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
@@ -38,10 +40,8 @@ public class SelectBranch extends AppCompatActivity {
             params.setMargins(12, 12, 12, 12);
             cardView.setLayoutParams(params);
 
-
             cardView.setRadius(15);
             cardView.setCardElevation(6);
-
 
             TextView textViewBranchName = new TextView(this);
             textViewBranchName.setLayoutParams(new LinearLayout.LayoutParams(
@@ -54,7 +54,7 @@ public class SelectBranch extends AppCompatActivity {
 
             cardView.addView(textViewBranchName);
 
-            linearLayout.addView(cardView);
+            branchLayout.addView(cardView);
         }
     }
 }
