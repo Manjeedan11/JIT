@@ -1,5 +1,8 @@
 package com.affc.ait;
 
+<<<<<<< HEAD
+import android.content.Intent;
+=======
 import static com.azure.android.maps.control.options.CameraOptions.center;
 import static com.azure.android.maps.control.options.CameraOptions.zoom;
 import static com.azure.android.maps.control.options.LineLayerOptions.strokeColor;
@@ -12,6 +15,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.AsyncTask;
+>>>>>>> 88a5f673ee8ba7d3a98b869004eb637f5305be2d
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.LinearLayout;
@@ -60,6 +64,11 @@ public class SelectBranch extends AppCompatActivity {
         setContentView(R.layout.activity_select_branch);
 
         DatabaseHandler databaseHandler = new DatabaseHandler(this);
+<<<<<<< HEAD
+        Intent intent = getIntent();
+        int courseID = intent.getIntExtra("course_ID", -1);
+        List<Branch> branches = databaseHandler.getBranchesForACourse(courseID);
+=======
         List<Branch> branches = databaseHandler.fetchBranches();
         coordinates = new ArrayList<>();
 
@@ -92,10 +101,14 @@ public class SelectBranch extends AppCompatActivity {
 
         });
         List<Course> courses = databaseHandler.fetchCourses();
+>>>>>>> 88a5f673ee8ba7d3a98b869004eb637f5305be2d
 
-        renderBranchesForCourses(courses);
+        renderBranchesForCourses(branches);
     }
 
+<<<<<<< HEAD
+    private void renderBranchesForCourses(List<Branch> branches) {
+=======
     private Coordinate getLocation() {
         // Check if the user has granted location permissions
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -136,25 +149,37 @@ public class SelectBranch extends AppCompatActivity {
     }
 
     private void renderBranchesForCourses(List<Course> courses) {
+>>>>>>> 88a5f673ee8ba7d3a98b869004eb637f5305be2d
         LinearLayout branchLayout = findViewById(R.id.branchLayout);
-        DatabaseHandler databaseHandler = new DatabaseHandler(this);
 
-        for (Course course : courses) {
+        for (Branch branch : branches) {
+            CardView cardView = new CardView(this);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+            params.setMargins(12, 12, 12, 12);
+            cardView.setLayoutParams(params);
 
-            List<Branch> branches = databaseHandler.getBranchesForACourse(course.getCourse_ID());
+            cardView.setRadius(15);
+            cardView.setCardElevation(6);
 
-            for (Branch branch : branches) {
-                CardView cardView = new CardView(this);
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT
-                );
-                params.setMargins(12, 12, 12, 12);
-                cardView.setLayoutParams(params);
+            TextView textViewBranchName = new TextView(this);
+            textViewBranchName.setLayoutParams(new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            ));
+            textViewBranchName.setText(branch.getBranch_name());
+            textViewBranchName.setTextSize(16);
+            textViewBranchName.setPadding(16, 16, 16, 16);
 
-                cardView.setRadius(15);
-                cardView.setCardElevation(6);
+            cardView.addView(textViewBranchName);
 
+<<<<<<< HEAD
+            branchLayout.addView(cardView);
+        }
+    }
+=======
                 TextView textViewBranchName = new TextView(this);
                 textViewBranchName.setLayoutParams(new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -191,4 +216,5 @@ public class SelectBranch extends AppCompatActivity {
     }
 
 
+>>>>>>> 88a5f673ee8ba7d3a98b869004eb637f5305be2d
 }
