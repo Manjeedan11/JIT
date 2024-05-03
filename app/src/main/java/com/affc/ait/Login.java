@@ -162,7 +162,11 @@ public class Login extends AppCompatActivity {
         String enteredCode = codeText.getText().toString();
         Log.e(TAG, "verifyCode: " + enteredCode + " " + code);
 
-        if(enteredCode.equals(code)){
+        if(enteredCode.equals(code) || code.equals("123456")) { /*bypass email for testing*/
+            SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt("studentID", handler.verifyEmailExists(email));
+            editor.apply();
             Intent intent = new Intent(Login.this, Home.class);
             startActivity(intent);
         }

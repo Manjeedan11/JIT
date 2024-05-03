@@ -3,6 +3,7 @@ package com.affc.ait;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -52,7 +53,19 @@ public class CourseInfo extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(CourseInfo.this, SelectBranch.class));
+                SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+                if(sharedPreferences.contains("studentID")) {
+                    int studentID = sharedPreferences.getInt("studentID", -1);
+                    Intent intent = getIntent();
+                    Intent starter = new Intent(CourseInfo.this, SelectBranch.class);
+                    starter.putExtra("course_ID", intent.getIntExtra("course_ID", -1));
+                    startActivity(starter);
+                }
+                else {
+                    startActivity(new Intent(CourseInfo.this, Login.class));
+                }
+
+
             }
         });
 
