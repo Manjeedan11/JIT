@@ -174,12 +174,5 @@ public class Home extends AppCompatActivity{
         }
 
     }
-<<<<<<< HEAD
-}
-=======
-
 
 }
-
-
->>>>>>> 11895ebff1d22a6737ec9e3a0eaeb24303e3716b

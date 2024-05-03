@@ -12,7 +12,10 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven("https://atlas.microsoft.com/sdk/android")
         maven("https://jitpack.io")
+        jcenter()
+
     }
 }
 

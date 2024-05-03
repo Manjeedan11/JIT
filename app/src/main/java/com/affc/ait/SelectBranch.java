@@ -9,10 +9,18 @@ import androidx.cardview.widget.CardView;
 
 import com.affc.ait.db.DatabaseHandler;
 import com.affc.ait.models.Branch;
+import com.azure.android.maps.control.AzureMaps;
+import com.azure.android.maps.control.MapControl;
 
 import java.util.List;
 
 public class SelectBranch extends AppCompatActivity {
+
+    static {
+        AzureMaps.setSubscriptionKey("YuAD1rFoXVTjQa_-EmN-0zcFygvuCAsrncE4LVdOd0k");
+    }
+
+    MapControl mapControl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,11 +29,17 @@ public class SelectBranch extends AppCompatActivity {
 
         DatabaseHandler databaseHandler = new DatabaseHandler(this);
         List<Branch> branches = databaseHandler.fetchBranches();
-<<<<<<< HEAD
-
-=======
->>>>>>> 11895ebff1d22a6737ec9e3a0eaeb24303e3716b
         renderBranches(branches);
+
+        mapControl = findViewById(R.id.mapcontrol);
+
+        mapControl.onCreate(savedInstanceState);
+
+        //Wait until the map resources are ready.
+        mapControl.onReady(map -> {
+            //Add your post map load code here.
+
+        });
     }
 
     private void renderBranches(List<Branch> branches) {
