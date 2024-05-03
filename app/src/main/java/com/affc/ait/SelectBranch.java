@@ -21,10 +21,6 @@ public class SelectBranch extends AppCompatActivity {
 
         DatabaseHandler databaseHandler = new DatabaseHandler(this);
         List<Branch> branches = databaseHandler.fetchBranches();
-<<<<<<< HEAD
-
-=======
->>>>>>> eeb1aee9c29cef343fc35d5f94cbcbd56bc5a214
         renderBranches(branches);
     }
 

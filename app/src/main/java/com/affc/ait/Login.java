@@ -29,7 +29,6 @@ import java.util.Objects;
 import java.util.Properties;
 
 public class Login extends AppCompatActivity {
-    Database_OLDCODE db;
     Button btnLogin;
 
     private String email;

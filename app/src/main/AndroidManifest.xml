@@ -17,6 +17,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".Home"
             android:exported="false" />
         <activity
@@ -43,7 +52,7 @@
 
         <activity
             android:name=".SearchUsers"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".AddBranch"
             android:exported="false" />
@@ -52,10 +61,10 @@
             android:exported="false" />
         <activity
             android:name=".Register"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".AdminDashboard"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".SetupProfileActivity"
             android:exported="false" />
@@ -64,18 +73,11 @@
             android:exported="true" />
         <activity
             android:name=".AdminLogin"
-            android:exported="true" >
-            <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
-
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
+            android:exported="true">
         </activity>
         <activity
             android:name=".SelectBranch"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"/>
 
         <meta-data
             android:name="preloaded_fonts"
