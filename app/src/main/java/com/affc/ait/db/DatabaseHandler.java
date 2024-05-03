@@ -69,6 +69,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 "    enrollment_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "    student_ID INTEGER, " +
                 "    course_ID INTEGER, " +
+                "    branch_ID INTEGER, " +
                 "    FOREIGN KEY(student_ID) REFERENCES Student(Student_ID), " +
                 "    FOREIGN KEY(course_ID) REFERENCES Course(course_ID) " +
                 ");";
@@ -170,10 +171,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return students;
     }
 
-    public int enrollStudentForCourse(Student student, Course course) {
+    public int enrollStudentForCourse(Student student, Course course, Branch branch) {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM Enrollment WHERE student_ID = ? AND course_ID= ?", new String[]{String.valueOf(student.getId()), String.valueOf(course.getCourse_ID())});
+        Cursor cursor = db.rawQuery("SELECT * FROM Enrollment WHERE student_ID = ? AND course_ID= ? AND branch_ID = ?", new String[]{String.valueOf(student.getId()), String.valueOf(course.getCourse_ID()), String.valueOf(branch.getBranch_id())});
         if (cursor.getCount() > 0) {
             cursor.close();
             db.close();
@@ -183,6 +184,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put("student_ID", student.getId());
         values.put("course_ID", course.getCourse_ID());
+        values.put("branch_ID", branch.getBranch_id());
         // Inserting Row
         db.insert("Enrollment", null, values);
         //2nd argument is String containing nullColumnHack
