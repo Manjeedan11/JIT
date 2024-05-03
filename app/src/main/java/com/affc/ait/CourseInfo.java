@@ -55,7 +55,6 @@ public class CourseInfo extends AppCompatActivity {
             public void onClick(View v) {
                 SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
                 if(sharedPreferences.contains("studentID")) {
-                    int studentID = sharedPreferences.getInt("studentID", -1);
                     Intent intent = getIntent();
                     Intent starter = new Intent(CourseInfo.this, SelectBranch.class);
                     starter.putExtra("course_ID", intent.getIntExtra("course_ID", -1));
@@ -64,8 +63,6 @@ public class CourseInfo extends AppCompatActivity {
                 else {
                     startActivity(new Intent(CourseInfo.this, Login.class));
                 }
-
-
             }
         });
 

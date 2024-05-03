@@ -531,5 +531,35 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return courses;
     }
 
+    public Course getCourseByID(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM Course WHERE course_ID=?", new String[]{String.valueOf(id)});
+        if (cursor.getCount()  >= 1) {
+            cursor.moveToFirst();
+            return new Course(cursor.getInt(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getString(3),
+                    cursor.getDouble(4),
+                    cursor.getString(5),
+                    cursor.getInt(6));
+        } else {
+            return null;
+        }
+    }
+
+    public Branch getBranchByID(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM Branch WHERE branch_ID=?", new String[]{String.valueOf(id)});
+        if (cursor.getCount()  >= 1) {
+            cursor.moveToFirst();
+            return new Branch(cursor.getInt(0),
+                    cursor.getString(1),
+                    cursor.getString(2));
+        } else {
+            return null;
+        }
+    }
+
 
 }

@@ -166,6 +166,14 @@ public class SelectBranch extends AppCompatActivity {
             textViewBranchName.setTextSize(16);
             textViewBranchName.setPadding(16, 16, 16, 16);
 
+            cardView.setOnClickListener(v -> {
+               Intent intent = getIntent();
+                Intent starter = new Intent(SelectBranch.this, ConfirmCourse.class);
+                starter.putExtra("course_ID", intent.getIntExtra("course_ID", -1));
+                starter.putExtra("branch_ID", branch.getBranch_id());
+                startActivity(starter);
+            });
+
             cardView.addView(textViewBranchName);
 
             branchLayout.addView(cardView);
