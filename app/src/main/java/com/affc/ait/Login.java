@@ -17,6 +17,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.affc.ait.db.DatabaseHandler;
 import com.affc.ait.models.Student;
+import com.affc.ait.utils.EmailHandler;
+import com.affc.ait.utils.UserInstance;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
@@ -33,13 +35,19 @@ public class Login extends AppCompatActivity {
 
     private String email;
 
-    private FirebaseAuth firebaseAuth;
+    private UserInstance userInstance;
+    private DatabaseHandler handler;
+
+    private EmailHandler emailer;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        FirebaseApp.initializeApp(this);
+        handler = new DatabaseHandler(this);
+        userInstance = UserInstance.getInstance(this);
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
 
     }
 
@@ -50,8 +58,48 @@ public class Login extends AppCompatActivity {
     }
 
     private void sendLoginCode(View view) {
-        Log.d(TAG, "login code");
+        Student student = new Student(handler.verifyEmailExists(email));
+        if (student.getId() == -1) {
+            showErrorMessage("Email not found");
+            return;
+        }
+        else {
+            userInstance.setEmail(email);
+            handler.updateLoginCode(student);
+            String code = student.generateLoginCode();
+
+            emailer = new EmailHandler(email, code, true);
+            emailer.execute();
+
+            Log.d(TAG, "login code sent");
+
+        }
     }
+
+    public void verifyCode(View view) {
+        email = userInstance.getEmail();
+        if (email.isEmpty()) {
+            showErrorMessage("Email cannot be empty");
+            return;
+        }
+        EditText codeField = findViewById(R.id.code);
+        String code = codeField.getText().toString();
+        if(code.isEmpty()) {
+            showErrorMessage("Code cannot be empty");
+        }
+
+        if (handler.authStudent(email,code)) {
+            userInstance.setUserId(handler.verifyEmailExists(email));
+            userInstance.setAdmin(false);
+            Intent intent = new Intent();
+            intent.setClass(this, Home.class);
+            startActivity(intent);
+            finish();
+        };
+
+    }
+
+
 
     public void redirect(View view) {
         Intent intent = new Intent();

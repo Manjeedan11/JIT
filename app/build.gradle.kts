@@ -34,6 +34,9 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    packagingOptions {
+        exclude("META-INF/NOTICE.md")
+    }
 }
 
 dependencies {
@@ -61,6 +64,8 @@ dependencies {
 
     implementation("com.github.dhaval2404:imagepicker:2.1")
     implementation("com.squareup.picasso:picasso:2.71828")
+    implementation ("com.sun.mail:android-mail:1.6.6")
+    implementation ("com.sun.mail:android-activation:1.6.7")
 
 
 

@@ -7,9 +7,13 @@ public class UserInstance {
     private static final String PREF_NAME = "UserInstancePrefs";
     private static final String KEY_USER_ID = "user_id";
     private static final String KEY_IS_ADMIN = "isAdmin";
+    private static final String KEY_EMAIL = "email";
 
     private static UserInstance instance;
     private int userId;
+
+
+    private String email;
     private boolean isAdmin;
     private SharedPreferences sharedPreferences;
 
@@ -17,6 +21,7 @@ public class UserInstance {
         sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         userId = sharedPreferences.getInt(KEY_USER_ID, -1);
         isAdmin = sharedPreferences.getBoolean(KEY_IS_ADMIN, false);
+        email = sharedPreferences.getString(KEY_EMAIL, null);
     }
 
     public static synchronized UserInstance getInstance(Context context) {
@@ -27,7 +32,7 @@ public class UserInstance {
     }
 
     public int getUserId() {
-        return userId;
+        return sharedPreferences.getInt(KEY_USER_ID, -1);
     }
 
     public void setUserId(int userId) {
@@ -36,13 +41,24 @@ public class UserInstance {
     }
 
     public boolean isAdmin() {
-        return isAdmin;
+
+        return sharedPreferences.getBoolean(KEY_IS_ADMIN, false);
     }
 
     public void setAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
         saveToSharedPreferences(KEY_IS_ADMIN, isAdmin);
     }
+
+    public String getEmail() {
+        return sharedPreferences.getString(KEY_EMAIL, null);
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+        saveToSharedPreferences(KEY_EMAIL, email);
+    }
+
 
     public void logout() {
         // Clear user data
@@ -60,6 +76,9 @@ public class UserInstance {
             editor.putInt(key, (Integer) value);
         } else if (value instanceof Boolean) {
             editor.putBoolean(key, (Boolean) value);
+        }
+        else if (value instanceof  String) {
+            editor.putString(key, (String) value);
         }
         editor.apply();
     }
