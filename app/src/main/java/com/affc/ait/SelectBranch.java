@@ -9,6 +9,7 @@ import androidx.cardview.widget.CardView;
 
 import com.affc.ait.db.DatabaseHandler;
 import com.affc.ait.models.Branch;
+import com.affc.ait.models.Course;
 
 import java.util.List;
 
@@ -20,41 +21,45 @@ public class SelectBranch extends AppCompatActivity {
         setContentView(R.layout.activity_select_branch);
 
         DatabaseHandler databaseHandler = new DatabaseHandler(this);
-        List<Branch> branches = databaseHandler.fetchBranches();
-<<<<<<< HEAD
+        List<Course> courses = databaseHandler.fetchCourses();
 
-=======
->>>>>>> 11895ebff1d22a6737ec9e3a0eaeb24303e3716b
-        renderBranches(branches);
+        renderBranchesForCourses(courses);
     }
 
-    private void renderBranches(List<Branch> branches) {
+    private void renderBranchesForCourses(List<Course> courses) {
         LinearLayout branchLayout = findViewById(R.id.branchLayout);
+        DatabaseHandler databaseHandler = new DatabaseHandler(this);
 
-        for (Branch branch : branches) {
-            CardView cardView = new CardView(this);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-            );
-            params.setMargins(12, 12, 12, 12);
-            cardView.setLayoutParams(params);
+        for (Course course : courses) {
 
-            cardView.setRadius(15);
-            cardView.setCardElevation(6);
+            List<Branch> branches = databaseHandler.getBranchesForACourse(course.getCourse_ID());
 
-            TextView textViewBranchName = new TextView(this);
-            textViewBranchName.setLayoutParams(new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-            ));
-            textViewBranchName.setText(branch.getBranch_name());
-            textViewBranchName.setTextSize(20);
-            textViewBranchName.setPadding(16, 16, 16, 16);
+            for (Branch branch : branches) {
+                CardView cardView = new CardView(this);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                );
+                params.setMargins(12, 12, 12, 12);
+                cardView.setLayoutParams(params);
 
-            cardView.addView(textViewBranchName);
+                cardView.setRadius(15);
+                cardView.setCardElevation(6);
 
-            branchLayout.addView(cardView);
+                TextView textViewBranchName = new TextView(this);
+                textViewBranchName.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                ));
+                textViewBranchName.setText(branch.getBranch_name());
+                textViewBranchName.setTextSize(16);
+                textViewBranchName.setPadding(16, 16, 16, 16);
+
+                cardView.addView(textViewBranchName);
+
+                branchLayout.addView(cardView);
+            }
         }
     }
+
 }
