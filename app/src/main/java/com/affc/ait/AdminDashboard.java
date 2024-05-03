@@ -43,7 +43,7 @@ public class AdminDashboard extends AppCompatActivity {
         adminLogOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AdminDashboard.this, AdminLogin.class));
+                startActivity(new Intent(AdminDashboard.this, Home.class));
             }
         });
     }

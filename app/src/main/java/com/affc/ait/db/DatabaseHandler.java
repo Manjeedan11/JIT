@@ -212,10 +212,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return branches;
     }
 
-    public int addCourseToBranch(Course course, Branch branch) {
+    public int addCourseToBranch(int courseId, int branchId) {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT branch_ID FROM Branch_Course WHERE course_ID=? AND branch_ID=?", new String[]{String.valueOf(course.getCourse_ID()), String.valueOf(branch.getBranch_id())});
+        Cursor cursor = db.rawQuery("SELECT branch_ID FROM Branch_Course WHERE course_ID=? AND branch_ID=?", new String[]{String.valueOf(courseId), String.valueOf(branchId)});
         if (cursor.getCount() > 0) {
             cursor.close();
             db.close();
@@ -223,15 +223,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
 
         ContentValues values = new ContentValues();
-        values.put("course_ID", course.getCourse_ID());
-        values.put("branch_ID", branch.getBranch_id());
+        values.put("course_ID", courseId);
+        values.put("branch_ID", branchId);
 
-
-        // Inserting Row
-        db.insert("Student", null, values);
-        //2nd argument is String containing nullColumnHack
+        // Inserting Row into Branch_Course table
+        long result = db.insert("Branch_Course", null, values);
         db.close(); // Closing database connection
-        return 1;
+
+        return result != -1 ? 1 : -1;
     }
 
 
@@ -339,7 +338,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return students;
     }
 
-    public void addCourse(Course course) {
+    public long addCourse(Course course) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -349,11 +348,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put("fee", course.getFee());
         values.put("description", course.getDescription());
         values.put("max_p", course.getMax_p());
-        // Inserting Row
-        db.insert("Course", null, values);
-        //2nd argument is String containing nullColumnHack
+
+        // Inserting Row and getting the inserted row ID
+        long insertedRowId = db.insert("Course", null, values);
         db.close(); // Closing database connection
+
+        return insertedRowId;
     }
+
 
     public List<Course> fetchCourses() {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -418,6 +420,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             return null;
         }
     }
+
+    public int getBranchIdByName(String branchName) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT branch_ID FROM Branch WHERE branch_name=?", new String[]{branchName});
+        int branchId = -1; // Default value if branch is not found
+
+        if (cursor.moveToFirst()) {
+            branchId = cursor.getInt(0);
+        }
+
+        cursor.close();
+        return branchId;
+    }
+
 
     public boolean addAdmin(String email, String password) {
         SQLiteDatabase db = this.getWritableDatabase();

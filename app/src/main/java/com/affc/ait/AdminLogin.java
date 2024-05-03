@@ -23,7 +23,7 @@ public class AdminLogin extends AppCompatActivity {
         editTextUsername = findViewById(R.id.username);
         editTextPassword = findViewById(R.id.password);
         btnAdminLogin = findViewById(R.id.btn_adminLogin);
-        insertAdmin();
+        //insertAdmin();
         btnAdminLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,7 +49,7 @@ public class AdminLogin extends AppCompatActivity {
         return dbHandler.authAdmin(adminEmail, adminPassword);
     }
 
-    private void insertAdmin() {
+    /*private void insertAdmin() {
         DatabaseHandler dbHandler = new DatabaseHandler(this);
 
         String adminEmail = "admin332@jit.com";
@@ -64,6 +64,6 @@ public class AdminLogin extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Admin already exists!", Toast.LENGTH_SHORT).show();
         }
-    }
+    }*/
 
 }

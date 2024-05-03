@@ -86,7 +86,19 @@ public class addCourses extends AppCompatActivity {
 
     private void addCourseToDatabase(Course course) {
         DatabaseHandler dbHandler = new DatabaseHandler(this);
-        dbHandler.addCourse(course);
-        Toast.makeText(this, "Course added successfully!", Toast.LENGTH_SHORT).show();
+        long courseId = dbHandler.addCourse(course);
+
+        String selectedBranchName = spinnerBranches.getSelectedItem().toString();
+
+        int branchId = dbHandler.getBranchIdByName(selectedBranchName);
+
+        int result = dbHandler.addCourseToBranch((int) courseId, branchId);
+
+        if (result != -1) {
+            Toast.makeText(this, "Course added successfully!", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Failed to add course to branch!", Toast.LENGTH_SHORT).show();
+        }
     }
+
 }
