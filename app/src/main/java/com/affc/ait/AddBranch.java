@@ -44,7 +44,7 @@ public class AddBranch extends AppCompatActivity {
     }
     private void addBranchToDatabase(Branch branch){
         DatabaseHandler dbHandler = new DatabaseHandler(this);
-        dbHandler.addBranch((branch));
+        dbHandler.addBranch(branch);
         Toast.makeText(this, "Branch added successfully!", Toast.LENGTH_SHORT).show();
     }
 }
