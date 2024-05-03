@@ -1,8 +1,7 @@
 package com.affc.ait;
 
-<<<<<<< HEAD
 import android.content.Intent;
-=======
+
 import static com.azure.android.maps.control.options.CameraOptions.center;
 import static com.azure.android.maps.control.options.CameraOptions.zoom;
 import static com.azure.android.maps.control.options.LineLayerOptions.strokeColor;
@@ -15,7 +14,6 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.AsyncTask;
->>>>>>> 88a5f673ee8ba7d3a98b869004eb637f5305be2d
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.LinearLayout;
@@ -64,12 +62,9 @@ public class SelectBranch extends AppCompatActivity {
         setContentView(R.layout.activity_select_branch);
 
         DatabaseHandler databaseHandler = new DatabaseHandler(this);
-<<<<<<< HEAD
         Intent intent = getIntent();
         int courseID = intent.getIntExtra("course_ID", -1);
         List<Branch> branches = databaseHandler.getBranchesForACourse(courseID);
-=======
-        List<Branch> branches = databaseHandler.fetchBranches();
         coordinates = new ArrayList<>();
 
         mapControl = findViewById(R.id.mapcontrol);
@@ -100,15 +95,9 @@ public class SelectBranch extends AppCompatActivity {
             }
 
         });
-        List<Course> courses = databaseHandler.fetchCourses();
->>>>>>> 88a5f673ee8ba7d3a98b869004eb637f5305be2d
-
         renderBranchesForCourses(branches);
     }
 
-<<<<<<< HEAD
-    private void renderBranchesForCourses(List<Branch> branches) {
-=======
     private Coordinate getLocation() {
         // Check if the user has granted location permissions
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -148,8 +137,8 @@ public class SelectBranch extends AppCompatActivity {
         }
     }
 
-    private void renderBranchesForCourses(List<Course> courses) {
->>>>>>> 88a5f673ee8ba7d3a98b869004eb637f5305be2d
+
+    private void renderBranchesForCourses(List<Branch> branches) {
         LinearLayout branchLayout = findViewById(R.id.branchLayout);
 
         for (Branch branch : branches) {
@@ -175,46 +164,25 @@ public class SelectBranch extends AppCompatActivity {
 
             cardView.addView(textViewBranchName);
 
-<<<<<<< HEAD
             branchLayout.addView(cardView);
+            new AsyncTask<String, Void, Coordinate>() {
+                @SuppressLint("StaticFieldLeak")
+                @Override
+                protected Coordinate doInBackground(String... locations) {
+                    GeoLocationParser geoLocationParser = new GeoLocationParser();
+                    double[] c = geoLocationParser.parseLocation(locations[0]);
+                    Log.e("Location", c[0] + " " + c[1]);
+                    coordinates.add(new Coordinate(c[0], c[1]));
+                    return new Coordinate(c[0], c[1]);
+                }
+
+                @Override
+                protected void onPostExecute(Coordinate coordinate) {
+                    coordinates.add(coordinate);
+                }
+            }.execute(branch.getLocation());
+
+
         }
     }
-=======
-                TextView textViewBranchName = new TextView(this);
-                textViewBranchName.setLayoutParams(new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.WRAP_CONTENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT
-                ));
-                textViewBranchName.setText(branch.getBranch_name());
-                textViewBranchName.setTextSize(16);
-                textViewBranchName.setPadding(16, 16, 16, 16);
-
-                cardView.addView(textViewBranchName);
-
-                branchLayout.addView(cardView);
-
-                new AsyncTask<String, Void, Coordinate>() {
-                    @SuppressLint("StaticFieldLeak")
-                    @Override
-                    protected Coordinate doInBackground(String... locations) {
-                        GeoLocationParser geoLocationParser = new GeoLocationParser();
-                        double[] c = geoLocationParser.parseLocation(locations[0]);
-                        Log.e("Location", c[0] + " " + c[1]);
-                        coordinates.add(new Coordinate(c[0], c[1]));
-                        return new Coordinate(c[0], c[1]);
-                    }
-
-                    @Override
-                    protected void onPostExecute(Coordinate coordinate) {
-                        coordinates.add(coordinate);
-                    }
-                }.execute(branch.getLocation());
-
-
-            }
-        }
-    }
-
-
->>>>>>> 88a5f673ee8ba7d3a98b869004eb637f5305be2d
 }
