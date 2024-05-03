@@ -6,7 +6,6 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -20,7 +19,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.affc.ait.db.DatabaseHandler;
-import com.affc.ait.models.Course;
 import com.affc.ait.models.Student;
 import com.squareup.picasso.Picasso;
 
@@ -35,53 +33,52 @@ public class SearchUsers extends AppCompatActivity {
 
         DatabaseHandler databaseHandler = new DatabaseHandler(this);
 
-        //to get all students and put into view
-        List<Student> students = databaseHandler.fetchStudents();
+        // Get reference to the search bar
         EditText searchbar = findViewById(R.id.searchUser);
 
-        Log.d("TAG", "students: " + students.size());
+        // Fetch all students from the database
+        List<Student> students = databaseHandler.fetchStudents();
 
-
+        // Check if students are available
         if (students.size() == 0) {
             Toast.makeText(this, "No Users Found", Toast.LENGTH_SHORT).show();
         } else {
+            // Render the students
             renderStudents(students);
         }
 
-
+        // Add text watcher to the search bar for live search functionality
         searchbar.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                // Perform search based on the entered query
                 String query = searchbar.getText().toString();
                 List<Student> searchResults = runSearch(query);
+                // Render search results
                 renderStudents(searchResults);
             }
         });
-
-
     }
 
+    // Method to perform search based on the query
     private List<Student> runSearch(String query) {
         DatabaseHandler databaseHandler = new DatabaseHandler(this);
         return databaseHandler.queryUsersByName(query);
     }
 
+    // Method to render the list of students
     private void renderStudents(List<Student> students) {
         // Clear any previously rendered students
         LinearLayout linearLayout = findViewById(R.id.linearLayout);
         linearLayout.removeAllViews();
 
+        // Loop through each student and render them
         for (Student student : students) {
             // Create a new CardView
             CardView cardView = new CardView(this);
@@ -108,19 +105,18 @@ public class SearchUsers extends AppCompatActivity {
             );
             imageView.setLayoutParams(imageParams);
             imageView.setId(View.generateViewId()); // Generate unique ID for each view
-            //load in the image from the resource path stored in the student object
+            // Load the student's image using Picasso library or default image
             if (student.getProfilePicture() != null && !student.getProfilePicture().isEmpty()) {
                 String img_path = student.getProfilePicture();
-                //using 3rd party library to simplify it
                 Picasso.get().load(img_path).into(imageView);
             } else {
                 imageView.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.user));
             }
 
-
+            // Add ImageView to RelativeLayout
             relativeLayout.addView(imageView);
 
-            // Create TextViews for student information
+            // Create TextViews for student information (Name, Email, Phone)
             TextView nameTextView = createTextView(student.getName(), 80, 10);
             TextView emailTextView = createTextView(student.getEmail(), 80, 30);
             TextView phoneTextView = createTextView(student.getPhone(), 80, 50);
@@ -138,6 +134,7 @@ public class SearchUsers extends AppCompatActivity {
         }
     }
 
+    // Method to create TextView dynamically
     private TextView createTextView(String text, int marginLeft, int marginTop) {
         TextView textView = new TextView(this);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
@@ -151,5 +148,4 @@ public class SearchUsers extends AppCompatActivity {
         textView.setTextSize(18);
         return textView;
     }
-
 }
