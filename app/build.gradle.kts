@@ -67,6 +67,7 @@ dependencies {
     implementation("com.squareup.picasso:picasso:2.71828")
     implementation ("com.sun.mail:android-mail:1.6.6")
     implementation ("com.sun.mail:android-activation:1.6.7")
+    implementation("com.azure.android:azure-maps-control:1.0.0")
 
 
 
