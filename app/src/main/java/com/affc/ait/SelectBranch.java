@@ -7,6 +7,7 @@ import static com.azure.android.maps.control.options.CameraOptions.zoom;
 import static com.azure.android.maps.control.options.LineLayerOptions.strokeColor;
 import static com.azure.android.maps.control.options.LineLayerOptions.strokeDashArray;
 import static com.azure.android.maps.control.options.LineLayerOptions.strokeWidth;
+import static com.azure.android.maps.control.options.StyleOptions.style;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -35,6 +36,7 @@ import com.azure.android.maps.control.MapControl;
 import com.affc.ait.models.Course;
 import com.azure.android.maps.control.layer.LineLayer;
 import com.azure.android.maps.control.layer.SymbolLayer;
+import com.azure.android.maps.control.options.MapStyle;
 import com.azure.android.maps.control.source.DataSource;
 import com.google.android.gms.maps.model.LatLng;
 import com.mapbox.geojson.Feature;
@@ -64,17 +66,20 @@ public class SelectBranch extends AppCompatActivity {
         DatabaseHandler databaseHandler = new DatabaseHandler(this);
         Intent intent = getIntent();
         int courseID = intent.getIntExtra("course_ID", -1);
+        Log.e("CID", courseID + " ");
         List<Branch> branches = databaseHandler.getBranchesForACourse(courseID);
+        Log.e("Branches", branches.toString());
         coordinates = new ArrayList<>();
 
         mapControl = findViewById(R.id.mapcontrol);
-
+        renderBranchesForCourses(branches);
         mapControl.onCreate(savedInstanceState);
         Coordinate myLocation = getLocation();
         //Wait until the map resources are ready.
         mapControl.onReady(map -> {
             //Add your post map load code here.
             map.setCamera(center(Point.fromLngLat(myLocation.getLongitude(), myLocation.getLatitude())), zoom(17));
+            map.setStyle(style(MapStyle.SATELLITE));
 
             for (Coordinate coordinate : coordinates) {
                 DataSource source = new DataSource();
@@ -95,7 +100,6 @@ public class SelectBranch extends AppCompatActivity {
             }
 
         });
-        renderBranchesForCourses(branches);
     }
 
     private Coordinate getLocation() {
@@ -162,25 +166,17 @@ public class SelectBranch extends AppCompatActivity {
             textViewBranchName.setTextSize(16);
             textViewBranchName.setPadding(16, 16, 16, 16);
 
+            cardView.setOnClickListener(v -> {
+               Intent intent = getIntent();
+                Intent starter = new Intent(SelectBranch.this, ConfirmCourse.class);
+                starter.putExtra("course_ID", intent.getIntExtra("course_ID", -1));
+                starter.putExtra("branch_ID", branch.getBranch_id());
+                startActivity(starter);
+            });
+
             cardView.addView(textViewBranchName);
 
             branchLayout.addView(cardView);
-            new AsyncTask<String, Void, Coordinate>() {
-                @SuppressLint("StaticFieldLeak")
-                @Override
-                protected Coordinate doInBackground(String... locations) {
-                    GeoLocationParser geoLocationParser = new GeoLocationParser();
-                    double[] c = geoLocationParser.parseLocation(locations[0]);
-                    Log.e("Location", c[0] + " " + c[1]);
-                    coordinates.add(new Coordinate(c[0], c[1]));
-                    return new Coordinate(c[0], c[1]);
-                }
-
-                @Override
-                protected void onPostExecute(Coordinate coordinate) {
-                    coordinates.add(coordinate);
-                }
-            }.execute(branch.getLocation());
 
 
         }
