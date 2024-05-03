@@ -70,7 +70,7 @@ public class EmailHandler extends AsyncTask<Integer, Void, Boolean>{
     @Override
     protected void onPostExecute(Boolean result) {
         if (result) {
-            Log.e("TAG", "sent successfully");
+            Log.e("TAG", "sent successfully: " + receiver + " " + subject);
         } else {
             Log.e("TAG", "failed to send");
         }
