@@ -1,5 +1,6 @@
 package com.affc.ait;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,45 +22,40 @@ public class SelectBranch extends AppCompatActivity {
         setContentView(R.layout.activity_select_branch);
 
         DatabaseHandler databaseHandler = new DatabaseHandler(this);
-        List<Course> courses = databaseHandler.fetchCourses();
+        Intent intent = getIntent();
+        int courseID = intent.getIntExtra("course_ID", -1);
+        List<Branch> branches = databaseHandler.getBranchesForACourse(courseID);
 
-        renderBranchesForCourses(courses);
+        renderBranchesForCourses(branches);
     }
 
-    private void renderBranchesForCourses(List<Course> courses) {
+    private void renderBranchesForCourses(List<Branch> branches) {
         LinearLayout branchLayout = findViewById(R.id.branchLayout);
-        DatabaseHandler databaseHandler = new DatabaseHandler(this);
 
-        for (Course course : courses) {
+        for (Branch branch : branches) {
+            CardView cardView = new CardView(this);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+            params.setMargins(12, 12, 12, 12);
+            cardView.setLayoutParams(params);
 
-            List<Branch> branches = databaseHandler.getBranchesForACourse(course.getCourse_ID());
+            cardView.setRadius(15);
+            cardView.setCardElevation(6);
 
-            for (Branch branch : branches) {
-                CardView cardView = new CardView(this);
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT
-                );
-                params.setMargins(12, 12, 12, 12);
-                cardView.setLayoutParams(params);
+            TextView textViewBranchName = new TextView(this);
+            textViewBranchName.setLayoutParams(new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            ));
+            textViewBranchName.setText(branch.getBranch_name());
+            textViewBranchName.setTextSize(16);
+            textViewBranchName.setPadding(16, 16, 16, 16);
 
-                cardView.setRadius(15);
-                cardView.setCardElevation(6);
+            cardView.addView(textViewBranchName);
 
-                TextView textViewBranchName = new TextView(this);
-                textViewBranchName.setLayoutParams(new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.WRAP_CONTENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT
-                ));
-                textViewBranchName.setText(branch.getBranch_name());
-                textViewBranchName.setTextSize(16);
-                textViewBranchName.setPadding(16, 16, 16, 16);
-
-                cardView.addView(textViewBranchName);
-
-                branchLayout.addView(cardView);
-            }
+            branchLayout.addView(cardView);
         }
     }
-
 }

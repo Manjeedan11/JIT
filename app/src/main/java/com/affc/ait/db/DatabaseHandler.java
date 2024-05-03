@@ -193,24 +193,28 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public List<Branch> getBranchesForACourse(int course_id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT branch_ID FROM Branch_Course where course_ID = ?", new String[]{String.valueOf(course_id)});
+        Cursor cursor = db.rawQuery("SELECT branch_ID FROM Branch_Course WHERE course_ID = ?", new String[]{String.valueOf(course_id)});
         List<Integer> branch_IDs = new ArrayList<>();
         if (cursor.moveToFirst()) {
             do {
-                int contact = cursor.getInt(0);
-                branch_IDs.add(contact);
+                int branchID = cursor.getInt(0);
+                branch_IDs.add(branchID);
             } while (cursor.moveToNext());
         }
 
-        List<Branch> branches = new ArrayList<>();
-        for (int id :
-                branch_IDs) {
-            branches.add(getBranchInfo(id));
-        }
-
         cursor.close();
+
+        List<Branch> branches = new ArrayList<>();
+        for (int branchID : branch_IDs) {
+            Branch branch = getBranchInfo(branchID);
+            if (branch != null) {
+                branches.add(branch);
+            }
+        }
         return branches;
     }
+
+
 
     public int addCourseToBranch(int courseId, int branchId) {
         SQLiteDatabase db = this.getWritableDatabase();

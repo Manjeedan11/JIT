@@ -4,10 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.affc.ait.db.DatabaseHandler;
@@ -23,6 +26,8 @@ public class addCourses extends AppCompatActivity {
             editTextCourseFee, editTextMaxParticipants, editTextPublishDate;
     private Spinner spinnerBranches;
     private Button btnAddCourse;
+    private LinearLayout selectedBranchesLayout;
+    private List<Branch> selectedBranches = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +43,7 @@ public class addCourses extends AppCompatActivity {
         editTextMaxParticipants = findViewById(R.id.maxpp);
         editTextPublishDate = findViewById(R.id.publishDate);
         spinnerBranches = findViewById(R.id.branches);
+        selectedBranchesLayout = findViewById(R.id.selectedBranchesLayout);
 
         loadBranches();
 
@@ -51,12 +57,11 @@ public class addCourses extends AppCompatActivity {
                 String courseFeeStr = editTextCourseFee.getText().toString().trim();
                 String maxParticipantsStr = editTextMaxParticipants.getText().toString().trim();
                 String publishDate = editTextPublishDate.getText().toString().trim();
-                String selectedBranch = spinnerBranches.getSelectedItem().toString();
 
-                //TODO: add validation, like start date < end date etc
+                // Validate input fields
                 if (courseName.isEmpty() || description.isEmpty() || startDate.isEmpty() ||
                         endDate.isEmpty() || courseFeeStr.isEmpty() || maxParticipantsStr.isEmpty() ||
-                        publishDate.isEmpty()) {
+                        publishDate.isEmpty() || selectedBranches.isEmpty()) {
                     Toast.makeText(addCourses.this, "All fields are required!", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -82,23 +87,67 @@ public class addCourses extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, branchNames);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerBranches.setAdapter(adapter);
+
+        spinnerBranches.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                // Add selected branch to the list
+                Branch selectedBranch = branches.get(position);
+                selectedBranches.add(selectedBranch);
+
+                // Display selected branch
+                addSelectedBranch(selectedBranch);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Do nothing
+            }
+        });
+    }
+
+    private void addSelectedBranch(Branch branch) {
+        TextView textView = new TextView(this);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        params.setMargins(0, 0, 20, 0);
+        textView.setLayoutParams(params);
+        textView.setPadding(10, 5, 10, 5);
+        textView.setTextColor(getResources().getColor(R.color.white));
+        textView.setText(branch.getBranch_name());
+
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedBranchesLayout.removeView(textView);
+                selectedBranches.remove(branch);
+            }
+        });
+
+        selectedBranchesLayout.addView(textView);
     }
 
     private void addCourseToDatabase(Course course) {
         DatabaseHandler dbHandler = new DatabaseHandler(this);
         long courseId = dbHandler.addCourse(course);
 
-        String selectedBranchName = spinnerBranches.getSelectedItem().toString();
-
-        int branchId = dbHandler.getBranchIdByName(selectedBranchName);
-
-        int result = dbHandler.addCourseToBranch((int) courseId, branchId);
-
-        if (result != -1) {
+        if (courseId != -1) {
+            for (Branch branch : selectedBranches) {
+                int branchId = dbHandler.getBranchIdByName(branch.getBranch_name());
+                int result = dbHandler.addCourseToBranch((int) courseId, branchId);
+                if (result == -1) {
+                    // If adding course to branch fails, you may handle it here
+                    Toast.makeText(this, "Failed to add course to branch!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
             Toast.makeText(this, "Course added successfully!", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, "Failed to add course to branch!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Failed to add course!", Toast.LENGTH_SHORT).show();
         }
     }
+
 
 }

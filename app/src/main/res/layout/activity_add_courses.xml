@@ -120,6 +120,16 @@
             android:textColor="@color/white">
         </Spinner>
 
+        <LinearLayout
+            android:id="@+id/selectedBranchesLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/branches"
+            android:padding="10dp"
+            android:layout_marginTop="10dp">
+        </LinearLayout>
+
         <EditText
             android:id="@+id/publishDate"
             android:layout_width="match_parent"
