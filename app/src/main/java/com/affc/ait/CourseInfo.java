@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Button;
@@ -54,7 +55,8 @@ public class CourseInfo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-                if(sharedPreferences.contains("studentID")) {
+                if(sharedPreferences.getInt("studentID", -1) != -1) {
+                    Log.e("TAG", String.valueOf(sharedPreferences.getInt("studentID", -1)));
                     Intent intent = getIntent();
                     Intent starter = new Intent(CourseInfo.this, SelectBranch.class);
                     starter.putExtra("course_ID", intent.getIntExtra("course_ID", -1));

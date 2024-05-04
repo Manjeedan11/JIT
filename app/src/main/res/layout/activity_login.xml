@@ -162,6 +162,22 @@
                 android:textStyle="bold" />
 
 
+            <Button
+                android:id="@+id/btn_gues"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#FDAF7B"
+                android:text="Browse as Guest"
+                android:background="@android:color/transparent"
+                android:layout_gravity="center"
+                android:onClick="browseAsGuest"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+
 
         </LinearLayout>
 

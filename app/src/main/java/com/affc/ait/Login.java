@@ -96,6 +96,11 @@ public class Login extends AppCompatActivity {
         new SendEmailTask().execute();
     }
 
+    public void browseAsGuest(View view){
+        Intent intent = new Intent(this, Home.class);
+        startActivity(intent);
+    }
+
 
     // AsyncTask to send email in background
     class SendEmailTask extends AsyncTask<Integer, Void, Boolean> {

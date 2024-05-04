@@ -61,8 +61,8 @@ public class Home extends AppCompatActivity{
                             Intent intent = new Intent(Home.this, Home.class);
                             startActivity(intent);
                         } else if (title.equals("Logout")) {
-                            SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
-                            Log.e("email", "onMenuItemClick: " + sharedPreferences.getString("email", ""));
+                            SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+                            Log.e("email", "onMenuItemClick: " + sharedPreferences.getString("email", "") + sharedPreferences.getInt("studentID", -1));
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             //clear preferences
                             editor.clear();
