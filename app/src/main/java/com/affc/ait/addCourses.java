@@ -113,7 +113,7 @@ public class addCourses extends AppCompatActivity {
 
 
                 Course course = new Course(courseName, startDateStr, endDateStr,courseFee, description, maxParticipants);
-                course = new Course(courseName, startDate, endDate, courseFee, description, maxParticipants);
+                course = new Course(courseName, startDate.toString(), endDate.toString(), courseFee, description, maxParticipants);
                 addCourseToDatabase(course);
 
 
