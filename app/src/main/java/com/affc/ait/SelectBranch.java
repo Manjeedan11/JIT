@@ -169,14 +169,14 @@ public class SelectBranch extends AppCompatActivity {
 
                     return new Coordinate(latitude, longitude);
                 } else {
-                    Toast.makeText(this, "Unable to get current location", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Unable to get current location. defaulting", Toast.LENGTH_SHORT).show();
                 }
             }
         } else {
             // Request location permissions
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE);
         }
-        return null;
+        return new Coordinate(6.9063, 79.8708); //return default
     }
 
     // Method to handle permission request result
@@ -189,6 +189,7 @@ public class SelectBranch extends AppCompatActivity {
                 getLocation();
             } else {
                 // Permission denied
+                Log.e("denied", "onRequestPermissionsResult: " + grantResults[0]);
                 Toast.makeText(this, "Location permission denied", Toast.LENGTH_SHORT).show();
             }
         }
