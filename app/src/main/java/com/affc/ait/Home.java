@@ -1,9 +1,11 @@
 package com.affc.ait;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -59,7 +61,15 @@ public class Home extends AppCompatActivity{
                             Intent intent = new Intent(Home.this, Home.class);
                             startActivity(intent);
                         } else if (title.equals("Logout")) {
-
+                            SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
+                            Log.e("email", "onMenuItemClick: " + sharedPreferences.getString("email", ""));
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            //clear preferences
+                            editor.clear();
+                            editor.apply();
+                            finish();
+                            Intent intent = new Intent(Home.this, Login.class);
+                            startActivity(intent);
                         } else if (title.equals("Admin")) {
                             Intent intent = new Intent(Home.this, AdminLogin.class);
                             startActivity(intent);
