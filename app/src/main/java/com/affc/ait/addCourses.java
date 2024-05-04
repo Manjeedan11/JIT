@@ -17,7 +17,10 @@ import com.affc.ait.db.DatabaseHandler;
 import com.affc.ait.models.Branch;
 import com.affc.ait.models.Course;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class addCourses extends AppCompatActivity {
@@ -52,16 +55,16 @@ public class addCourses extends AppCompatActivity {
             public void onClick(View v) {
                 String courseName = editTextCourseName.getText().toString().trim();
                 String description = editTextDescription.getText().toString().trim();
-                String startDate = editTextStartDate.getText().toString().trim();
-                String endDate = editTextEndDate.getText().toString().trim();
+                String startDateStr = editTextStartDate.getText().toString().trim();
+                String endDateStr = editTextEndDate.getText().toString().trim();
                 String courseFeeStr = editTextCourseFee.getText().toString().trim();
                 String maxParticipantsStr = editTextMaxParticipants.getText().toString().trim();
-                String publishDate = editTextPublishDate.getText().toString().trim();
+                String publishDateStr = editTextPublishDate.getText().toString().trim();
 
                 // Validate input fields
-                if (courseName.isEmpty() || description.isEmpty() || startDate.isEmpty() ||
-                        endDate.isEmpty() || courseFeeStr.isEmpty() || maxParticipantsStr.isEmpty() ||
-                        publishDate.isEmpty() || selectedBranches.isEmpty()) {
+                if (courseName.isEmpty() || description.isEmpty() || startDateStr.isEmpty() ||
+                        endDateStr.isEmpty() || courseFeeStr.isEmpty() || maxParticipantsStr.isEmpty() ||
+                        publishDateStr.isEmpty() || selectedBranches.isEmpty()) {
                     Toast.makeText(addCourses.this, "All fields are required!", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -69,7 +72,32 @@ public class addCourses extends AppCompatActivity {
                 double courseFee = Double.parseDouble(courseFeeStr);
                 int maxParticipants = Integer.parseInt(maxParticipantsStr);
 
-                Course course = new Course(courseName, startDate, endDate, courseFee, description, maxParticipants);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+                Date startDate, endDate, publishDate;
+                try {
+                    startDate = dateFormat.parse(startDateStr);
+                    endDate = dateFormat.parse(endDateStr);
+                    publishDate = dateFormat.parse(publishDateStr); // Parse the publish date
+
+
+                    if (endDate.before(startDate)) {
+                        Toast.makeText(addCourses.this, "End date must be after start date!", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+
+                    if (publishDate.after(startDate)) {
+                        Toast.makeText(addCourses.this, "Publish date must be before the start date!", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                } catch (ParseException e) {
+                    Toast.makeText(addCourses.this, "Invalid date format!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+
+                Course course = new Course(courseName, startDateStr, endDateStr,courseFee, description, maxParticipants);
                 addCourseToDatabase(course);
             }
         });
