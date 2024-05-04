@@ -11,13 +11,18 @@ import static com.azure.android.maps.control.options.StyleOptions.style;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -100,6 +105,54 @@ public class SelectBranch extends AppCompatActivity {
             }
 
         });
+
+        ImageButton button = findViewById(R.id.hamburger);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Initializing the popup menu and giving the reference as current context
+                PopupMenu popupMenu = new PopupMenu(SelectBranch.this, button);
+
+                // Inflating popup menu from popup_menu.xml file
+                popupMenu.getMenuInflater().inflate(R.menu.nav_menu_silder, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        // Toast message on menu item clicked
+                        String title = (String) menuItem.getTitle();
+                        if (title.equals("Login")) {
+                            Intent intent = new Intent(SelectBranch.this, Login.class);
+                            startActivity(intent);
+                        } else if (title.equals("Register")) {
+                            Intent intent = new Intent(SelectBranch.this, Register.class);
+                            startActivity(intent);
+                        } else if (title.equals("Courses")) {
+                            Intent intent = new Intent(SelectBranch.this, Home.class);
+                            startActivity(intent);
+                        } else if (title.equals("Logout")) {
+                            SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+                            Log.e("email", "onMenuItemClick: " + sharedPreferences.getString("email", "") + sharedPreferences.getInt("studentID", -1));
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            //clear preferences
+                            editor.clear();
+                            editor.apply();
+                            finish();
+                            Intent intent = new Intent(SelectBranch.this, Login.class);
+                            startActivity(intent);
+                        } else if (title.equals("Admin")) {
+                            Intent intent = new Intent(SelectBranch.this, AdminLogin.class);
+                            startActivity(intent);
+                        }
+                        return true;
+                    }
+                });
+                // Showing the popup menu
+                popupMenu.show();
+            }
+        });
+
+
     }
 
     private Coordinate getLocation() {
