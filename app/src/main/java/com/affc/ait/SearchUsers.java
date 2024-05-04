@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.affc.ait.db.DatabaseHandler;
+import com.affc.ait.models.Course;
 import com.affc.ait.models.Student;
 import com.squareup.picasso.Picasso;
 
@@ -100,15 +101,16 @@ public class SearchUsers extends AppCompatActivity {
             // Create ImageView for the student's image
             ImageView imageView = new ImageView(this);
             RelativeLayout.LayoutParams imageParams = new RelativeLayout.LayoutParams(
-                    RelativeLayout.LayoutParams.WRAP_CONTENT,
-                    RelativeLayout.LayoutParams.WRAP_CONTENT
+                    100,
+                    100
             );
             imageView.setLayoutParams(imageParams);
             imageView.setId(View.generateViewId()); // Generate unique ID for each view
             // Load the student's image using Picasso library or default image
             if (student.getProfilePicture() != null && !student.getProfilePicture().isEmpty()) {
                 String img_path = student.getProfilePicture();
-                Picasso.get().load(img_path).into(imageView);
+                Log.d("img pth", img_path);
+                Picasso.get().load(img_path).error(R.drawable.user).into(imageView);
             } else {
                 imageView.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.user));
             }
@@ -147,5 +149,13 @@ public class SearchUsers extends AppCompatActivity {
         textView.setTextColor(getResources().getColor(R.color.white));
         textView.setTextSize(18);
         return textView;
+    }
+
+    @Override
+    protected  void onResume(){
+        super.onResume();
+        DatabaseHandler databaseHandler = new DatabaseHandler(this);
+        List<Student> students = databaseHandler.fetchStudents();
+        renderStudents(students);
     }
 }

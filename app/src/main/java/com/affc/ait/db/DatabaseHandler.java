@@ -320,7 +320,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public List<Student> fetchStudents() {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM Student", null);
+        Cursor cursor = db.rawQuery("SELECT Student_ID, name, email, address, city, phone, gender, DOB, profile_picture FROM Student", null);
         List<Student> students = new ArrayList<Student>();
 
         if (cursor.moveToFirst()) {

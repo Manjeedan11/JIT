@@ -114,6 +114,14 @@ public class Home extends AppCompatActivity{
 
     }
 
+    @Override
+    protected  void onResume(){
+        super.onResume();
+        DatabaseHandler databaseHandler = new DatabaseHandler(this);
+        List<Course> courses = databaseHandler.fetchCourses();
+        renderCourses(courses);
+    }
+
     private List<Course> runSearch(String query) {
         DatabaseHandler databaseHandler = new DatabaseHandler(this);
         return databaseHandler.queryCoursesByName(query);
@@ -184,7 +192,5 @@ public class Home extends AppCompatActivity{
         }
 
     }
-
-
 
 }
