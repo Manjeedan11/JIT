@@ -1,7 +1,10 @@
 package com.affc.ait;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -31,6 +34,7 @@ public class addCourses extends AppCompatActivity {
     private Button btnAddCourse;
     private LinearLayout selectedBranchesLayout;
     private List<Branch> selectedBranches = new ArrayList<>();
+    Course course;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +54,18 @@ public class addCourses extends AppCompatActivity {
 
         loadBranches();
 
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("default", "Channel name", NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setDescription("Channel description");
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+
+
         btnAddCourse.setOnClickListener(new View.OnClickListener() {
+
+
+
             @Override
             public void onClick(View v) {
                 String courseName = editTextCourseName.getText().toString().trim();
@@ -98,10 +113,23 @@ public class addCourses extends AppCompatActivity {
 
 
                 Course course = new Course(courseName, startDateStr, endDateStr,courseFee, description, maxParticipants);
+                course = new Course(courseName, startDate, endDate, courseFee, description, maxParticipants);
                 addCourseToDatabase(course);
+
+
+
+                NotificationCompat.Builder mbuilder = new NotificationCompat.Builder(getApplicationContext(), "default")
+                        .setSmallIcon(R.drawable.courses)
+                        .setContentTitle("AIT Institute")
+                        .setContentText("Course: " + course.getCourse_name() + " is starting on " + course.getStart_date() + " sign up now!");
+                NotificationManager notificationManager = (NotificationManager)
+                        getSystemService(NOTIFICATION_SERVICE);
+                notificationManager.notify(0, mbuilder.build());
             }
         });
     }
+
+
 
     private void loadBranches() {
         DatabaseHandler dbHandler = new DatabaseHandler(this);
