@@ -117,9 +117,9 @@ public class SearchUsers extends AppCompatActivity {
             relativeLayout.addView(imageView);
 
             // Create TextViews for student information (Name, Email, Phone)
-            TextView nameTextView = createTextView(student.getName(), 80, 10);
-            TextView emailTextView = createTextView(student.getEmail(), 80, 30);
-            TextView phoneTextView = createTextView(student.getPhone(), 80, 50);
+            TextView nameTextView = createTextView(student.getName(), 80, 100);
+            TextView emailTextView = createTextView(student.getEmail(), 80, 150);
+            TextView phoneTextView = createTextView(student.getPhone(), 80, 200);
 
             // Add TextViews to RelativeLayout
             relativeLayout.addView(nameTextView);

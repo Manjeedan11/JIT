@@ -64,14 +64,14 @@ public class ConfirmCourse extends AppCompatActivity {
         EditText codeField = findViewById(R.id.code);
         String code = codeField.getText().toString();
         if (code.equals("M563432")) {
-            body = body + "Discounted Fee(25%): " +   (course.getFee() *1.25);
+            body = body + "Discounted Fee(25%): " +   (course.getFee() *0.85);
         }
         else if(code.equals("S663435")) {
-            body = body + "Discounted Fee(40%): " +   (course.getFee() *1.4);
+            body = body + "Discounted Fee(40%): " +   (course.getFee() *0.6);
 
         }
         else if (code.equals("L763434")) {
-            body = body + "Discounted Fee(60%): " +   (course.getFee() *1.6);
+            body = body + "Discounted Fee(60%): " +   (course.getFee() *0.4);
 
         }
         else {

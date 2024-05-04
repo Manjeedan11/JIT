@@ -59,11 +59,13 @@ public class AdminLogin extends AppCompatActivity {
 
         boolean isAdminAdded = dbHandler.addAdmin(adminEmail, hashedPassword);
 
+
 //        if (isAdminAdded) {
 //            Toast.makeText(this, "Admin inserted successfully!", Toast.LENGTH_SHORT).show();
 //        } else {
 //            Toast.makeText(this, "Admin already exists!", Toast.LENGTH_SHORT).show();
 //        }
+
     }
 
 }
