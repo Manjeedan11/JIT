@@ -8,11 +8,16 @@ import static com.azure.android.maps.control.options.LineLayerOptions.strokeColo
 import static com.azure.android.maps.control.options.LineLayerOptions.strokeDashArray;
 import static com.azure.android.maps.control.options.LineLayerOptions.strokeWidth;
 import static com.azure.android.maps.control.options.StyleOptions.style;
+import static com.azure.android.maps.control.options.SymbolLayerOptions.iconImage;
+import static com.azure.android.maps.control.options.SymbolLayerOptions.textColor;
+import static com.azure.android.maps.control.options.SymbolLayerOptions.textField;
+import static com.azure.android.maps.control.options.SymbolLayerOptions.textSize;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.AsyncTask;
@@ -50,6 +55,7 @@ import com.mapbox.geojson.Point;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class SelectBranch extends AppCompatActivity {
 
@@ -73,7 +79,10 @@ public class SelectBranch extends AppCompatActivity {
         int courseID = intent.getIntExtra("course_ID", -1);
         Log.e("CID", courseID + " ");
         List<Branch> branches = databaseHandler.getBranchesForACourse(courseID);
-        Log.e("Branches", branches.toString());
+        for (Branch branch : branches) {
+            Log.e("Branches", branch.getBranch_name());
+            Log.e("Branches", branch.getLocation());
+        }
         coordinates = new ArrayList<>();
 
         mapControl = findViewById(R.id.mapcontrol);
@@ -86,9 +95,20 @@ public class SelectBranch extends AppCompatActivity {
             map.setCamera(center(Point.fromLngLat(myLocation.getLongitude(), myLocation.getLatitude())), zoom(17));
             map.setStyle(style(MapStyle.SATELLITE));
 
-            for (Coordinate coordinate : coordinates) {
+            for (Branch branch: branches) {
                 DataSource source = new DataSource();
                 map.sources.add(source);
+                //parse location with parser
+                GeoLocationParser parser = new GeoLocationParser();
+                Coordinate coordinate;
+                try {
+                    double[] c = parser.parseLocation(branch.getLocation());
+                    coordinate = new Coordinate(c[0], c[1]);
+                } catch (ExecutionException e) {
+                    throw new RuntimeException(e);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
 
                 List<Point> temp = new ArrayList<>();
                 temp.add(Point.fromLngLat(myLocation.getLongitude(), myLocation.getLatitude()));
@@ -96,6 +116,26 @@ public class SelectBranch extends AppCompatActivity {
 
                 //Create a point feature and add it to the data source.
                 source.add(Feature.fromGeometry(LineString.fromLngLats(temp)));
+
+                // Create a data source and add it to the map.
+                DataSource dataSource = new DataSource();
+                map.sources.add(dataSource);
+
+// Create a point at the geographic coordinates where you want to place the marker.
+                Point point = Point.fromLngLat(coordinate.getLongitude(), coordinate.getLatitude());
+
+// Create a feature from the point and add it to the data source.
+                Feature feature = Feature.fromGeometry(point);
+                dataSource.add(feature);
+
+// Create a symbol layer using the data source and add it to the map.
+                SymbolLayer symbolLayer = new SymbolLayer(dataSource,
+                        textField(branch.getBranch_name()), // Set the marker text.
+                        textSize(12f), // Set the text size.
+                        textColor(Color.RED) // Set the text color.
+                );
+                map.layers.add(symbolLayer);
+
 
                 //Create a symbol layer and add it to the map.
                 map.layers.add(new LineLayer(source,
