@@ -33,7 +33,16 @@
             android:textSize="20sp"
             />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="I have a discount code:"
+            />
+
+
         <EditText
+            android:id="@+id/code"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="I have a discount code"
@@ -41,6 +50,7 @@
             />
 
         <Button
+            android:id="@+id/confirmbutton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/gold"

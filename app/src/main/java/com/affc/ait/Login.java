@@ -98,7 +98,7 @@ public class Login extends AppCompatActivity {
 
 
     // AsyncTask to send email in background
-    private class SendEmailTask extends AsyncTask<Integer, Void, Boolean> {
+    class SendEmailTask extends AsyncTask<Integer, Void, Boolean> {
 
         @Override
         protected Boolean doInBackground(Integer... params) {
